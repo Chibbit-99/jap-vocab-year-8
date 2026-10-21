@@ -4,998 +4,451 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light dark" />
-<meta name="description" content="A self-contained study app for Year 8 Japanese: vocabulary, kanji and grammar patterns, with flashcards, quizzes and smart review." />
-<meta name="theme-color" content="#f6f1e7" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%232c4a73%22/%3E%3Ctext x=%2232%22 y=%2245%22 font-family=%22serif%22 font-size=%2238%22 fill=%22%23f6f1e7%22 text-anchor=%22middle%22%3E%E5%AD%A6%3C/text%3E%3C/svg%3E" />
-<title>Year 8 Japanese · Study companion</title>
+<meta name="description" content="Year 8 Japanese study app: vocabulary, kanji, grammar and sentence practice." />
+<meta name="theme-color" content="#fbfbf9" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%23191919%22/%3E%3Ctext x=%2232%22 y=%2244%22 font-family=%22serif%22 font-size=%2234%22 fill=%22%23fbfbf9%22 text-anchor=%22middle%22%3E%E5%AD%A6%3C/text%3E%3C/svg%3E" />
+<title>Year 8 Japanese</title>
 <style>
   :root {
-    --bg: #f6f1e7;
-    --bg-2: #efe7d9;
-    --surface: #fffdf7;
-    --surface-2: #faf5ea;
-    --ink: #23262d;
-    --muted: #706a5f;
-    --line: #e4dac9;
-    --line-strong: #d1c2a9;
-    --indigo: #2c4a73;
-    --indigo-soft: #e8eef7;
-    --primary: #2c4a73;
-    --primary-ink: #ffffff;
-    --vermilion: #bb4b37;
-    --vermilion-soft: #fbeae5;
-    --green: #2f7d5b;
-    --green-soft: #e7f3ec;
-    --red: #b7402f;
-    --red-soft: #fbe9e6;
-    --gold: #9c7621;
-    --gold-soft: #f7efdc;
-    --shadow: 0 1px 2px rgba(35, 32, 25, .04), 0 10px 28px rgba(35, 32, 25, .06);
-    --shadow-lg: 0 2px 4px rgba(35, 32, 25, .05), 0 22px 50px rgba(35, 32, 25, .12);
-    --radius: 16px;
-    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", Meiryo, sans-serif;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
+    --bg: #fbfbf9;
+    --surface: #ffffff;
+    --ink: #191919;
+    --muted: #767672;
+    --faint: #f2f2ee;
+    --line: #e6e6e0;
+    --line-strong: #cfcfc7;
+    --accent: #191919;
+    --green: #2f7d55;
+    --red: #b3442e;
+    --radius: 8px;
+    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --serif: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", Georgia, serif;
   }
-
   [data-theme="dark"] {
-    --bg: #14161b;
-    --bg-2: #1a1d24;
-    --surface: #1e222a;
-    --surface-2: #252a33;
-    --ink: #ece7df;
-    --muted: #a39c90;
-    --line: #333944;
-    --line-strong: #4a5361;
-    --indigo: #9ab6de;
-    --indigo-soft: #222e3f;
-    --primary: #9ab6de;
-    --primary-ink: #10141a;
-    --vermilion: #e3816d;
-    --vermilion-soft: #37241f;
-    --green: #74c39b;
-    --green-soft: #1b3027;
-    --red: #e58d7e;
-    --red-soft: #37211e;
-    --gold: #d8b768;
-    --gold-soft: #302815;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 12px 30px rgba(0, 0, 0, .22);
-    --shadow-lg: 0 2px 6px rgba(0, 0, 0, .3), 0 26px 60px rgba(0, 0, 0, .45);
+    --bg: #121212;
+    --surface: #1a1a1a;
+    --ink: #ededed;
+    --muted: #8f8f8a;
+    --faint: #212121;
+    --line: #2b2b2b;
+    --line-strong: #3d3d3d;
+    --accent: #ededed;
+    --green: #6fbf94;
+    --red: #e08269;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
+  html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(circle at 12% 0%, rgba(44, 74, 115, .055), transparent 38rem),
-      radial-gradient(circle at 88% 12%, rgba(187, 75, 55, .045), transparent 34rem),
-      repeating-linear-gradient(0deg, rgba(120, 100, 70, .022) 0 1px, transparent 1px 5px);
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--font);
-    font-size: 16px;
-    line-height: 1.55;
+    font-size: 15.5px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
   }
-
-  [data-theme="dark"] body {
-    background-image:
-      radial-gradient(circle at 12% 0%, rgba(120, 155, 205, .09), transparent 40rem),
-      radial-gradient(circle at 88% 12%, rgba(200, 110, 85, .06), transparent 36rem),
-      repeating-linear-gradient(0deg, rgba(255, 255, 255, .012) 0 1px, transparent 1px 5px);
-  }
-
-  ::selection { background: rgba(44, 74, 115, .2); }
-  [data-theme="dark"] ::selection { background: rgba(154, 182, 222, .3); }
-
-  :focus-visible {
-    outline: 2.5px solid var(--vermilion);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-
+  ::selection { background: var(--ink); color: var(--bg); }
+  :focus-visible { outline: 1.5px solid var(--ink); outline-offset: 2px; }
   button, input, select { font: inherit; color: inherit; }
   button { -webkit-tap-highlight-color: transparent; }
-  a { color: var(--indigo); }
-  h1, h2, h3, h4, p { margin: 0; }
-  ul { margin: 0; }
+  h1, h2, h3, p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  a { color: inherit; }
+  [hidden] { display: none !important; }
 
-  .skip-link {
-    position: absolute; left: 16px; top: -80px; z-index: 200;
-    background: var(--primary); color: var(--primary-ink);
-    padding: 10px 16px; border-radius: 0 0 10px 10px; text-decoration: none;
-    transition: top .2s;
-  }
-  .skip-link:focus { top: 0; }
+  .shell { max-width: 820px; margin: 0 auto; padding: 0 22px 96px; }
 
-  /* ---------- Header ---------- */
-  .topbar {
-    position: sticky; top: 0; z-index: 40;
-    background: rgba(246, 241, 231, .86);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+  /* header */
+  .top {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
-  [data-theme="dark"] .topbar { background: rgba(20, 22, 27, .86); }
-
-  .topbar-inner {
-    max-width: 1180px; margin: 0 auto;
-    display: flex; align-items: center; gap: 18px;
-    padding: 11px 24px;
+  .top-in {
+    max-width: 820px; margin: 0 auto; padding: 0 22px;
+    height: 52px; display: flex; align-items: center; gap: 22px;
   }
-
-  .brand {
-    display: flex; align-items: center; gap: 11px;
-    text-decoration: none; color: inherit; flex-shrink: 0;
+  .mark { font-family: var(--serif); font-size: 19px; text-decoration: none; line-height: 1; flex: none; }
+  .nav { display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    font-size: 13.5px; color: var(--muted); text-decoration: none;
+    padding: 4px 0; white-space: nowrap; border-bottom: 1px solid transparent;
   }
-  .brand-mark {
-    width: 44px; height: 44px; border-radius: 13px;
-    background: linear-gradient(150deg, #3a5c88, #1c3150);
-    color: #fff; display: grid; place-items: center;
-    font-family: var(--serif); font-size: 24px; line-height: 1;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 4px 12px rgba(28, 49, 80, .24);
-    position: relative;
-  }
-  .brand-mark::after {
-    content: ""; position: absolute; right: -4px; bottom: -4px;
-    width: 13px; height: 13px; border-radius: 50%;
-    background: var(--vermilion); border: 2.5px solid var(--bg);
-  }
-  .brand-title { display: block; font-family: var(--serif); font-size: 17px; line-height: 1.15; letter-spacing: .005em; }
-  .brand-sub { display: block; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
-
-  .main-nav {
-    display: flex; gap: 2px; margin-left: auto;
-    padding: 4px; border: 1px solid var(--line);
-    background: var(--surface-2); border-radius: 999px;
-  }
-  .main-nav a {
-    padding: 7px 14px; border-radius: 999px;
-    font-size: 13px; font-weight: 600; letter-spacing: .01em;
-    color: var(--muted); text-decoration: none; white-space: nowrap;
-    transition: background .15s, color .15s;
-  }
-  .main-nav a:hover { color: var(--ink); background: var(--surface); }
-  .main-nav a.active { background: var(--surface); color: var(--indigo); box-shadow: 0 1px 3px rgba(35, 32, 25, .09); }
-
-  .top-actions { display: flex; align-items: center; gap: 8px; }
-  .streak-pill {
-    font-size: 11.5px; font-weight: 700; color: var(--vermilion);
-    background: var(--vermilion-soft); border: 1px solid rgba(187, 75, 55, .18);
-    padding: 5px 10px; border-radius: 999px; white-space: nowrap;
-  }
+  .nav a:hover { color: var(--ink); }
+  .nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); }
+  .top-end { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .streak { font-size: 12px; color: var(--muted); white-space: nowrap; }
 
   .icon-btn {
-    width: 36px; height: 36px; flex: none;
     display: inline-grid; place-items: center;
-    border: 1px solid var(--line); border-radius: 10px;
-    background: var(--surface); color: var(--muted); cursor: pointer;
-    transition: background .15s, color .15s, border-color .15s;
+    width: 26px; height: 26px; padding: 0; flex: none;
+    border: 0; border-radius: 4px; background: none; color: var(--muted); cursor: pointer;
   }
-  .icon-btn:hover { background: var(--surface-2); color: var(--ink); border-color: var(--line-strong); }
-  .icon-btn svg { width: 18px; height: 18px; }
-  .theme-toggle .icon-moon { display: none; }
-  [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
-  [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+  .icon-btn:hover { color: var(--ink); background: var(--faint); }
+  .icon-btn svg { width: 15px; height: 15px; }
+  .theme-toggle .moon { display: none; }
+  [data-theme="dark"] .theme-toggle .sun { display: none; }
+  [data-theme="dark"] .theme-toggle .moon { display: block; }
 
-  /* ---------- Layout ---------- */
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 34px 24px 80px; }
-  #view { animation: rise .35s ease both; }
-  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  /* typography */
+  h1 { font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; }
+  .lede { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .page { padding-top: 36px; }
+  .page-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+  .count { font-size: 12px; color: var(--muted); }
+  .hr { height: 1px; background: var(--line); border: 0; margin: 30px 0; }
 
-  .eyebrow {
-    font-size: 10.5px; letter-spacing: .19em; text-transform: uppercase;
-    color: var(--vermilion); font-weight: 800;
-  }
-  .muted { color: var(--muted); }
-  .dim { opacity: .55; }
-  .jp { font-family: var(--font); }
-  .serif { font-family: var(--serif); }
-
-  .page-head {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 20px; flex-wrap: wrap; margin-bottom: 22px;
-  }
-  .page-head h1 { font-family: var(--serif); font-size: clamp(30px, 4vw, 40px); line-height: 1.08; letter-spacing: -.015em; margin-top: 4px; }
-  .page-head p { color: var(--muted); font-size: 14.5px; margin-top: 7px; max-width: 62ch; }
-  .page-head .head-stats { display: flex; gap: 22px; flex-wrap: wrap; }
-  .head-stat { text-align: right; }
-  .head-stat b { display: block; font-family: var(--serif); font-size: 25px; line-height: 1.1; }
-  .head-stat span { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-
-  .section-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 16px; margin: 40px 0 14px;
-  }
-  .section-head h2 { font-family: var(--serif); font-size: 25px; letter-spacing: -.01em; }
-  .section-head .link { font-size: 13px; font-weight: 600; text-decoration: none; }
-  .section-head .link:hover { text-decoration: underline; }
-
-  /* ---------- Buttons ---------- */
+  /* controls */
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    border: 1px solid transparent; border-radius: 11px;
-    padding: 9px 15px; font-size: 13.5px; font-weight: 700; line-height: 1.25;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 8px 13px; border: 1px solid var(--line-strong); border-radius: var(--radius);
+    background: var(--surface); font-size: 13.5px; line-height: 1.3;
     cursor: pointer; text-decoration: none; white-space: nowrap;
-    transition: transform .12s, background .15s, border-color .15s, box-shadow .15s, color .15s;
   }
-  .btn:active { transform: translateY(1px); }
-  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-  .btn-primary { background: var(--primary); color: var(--primary-ink); box-shadow: 0 3px 10px rgba(28, 49, 80, .16); }
-  .btn-primary:hover { filter: brightness(1.07); }
-  [data-theme="dark"] .btn-primary { box-shadow: 0 3px 12px rgba(0, 0, 0, .3); }
-  .btn-outline { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
-  .btn-outline:hover { background: var(--surface-2); border-color: var(--muted); }
-  .btn-soft { background: var(--indigo-soft); color: var(--indigo); border-color: transparent; }
-  .btn-soft:hover { filter: brightness(.98); box-shadow: inset 0 0 0 1px rgba(44, 74, 115, .15); }
-  .btn-vermilion { background: var(--vermilion); color: #fff; }
-  .btn-vermilion:hover { filter: brightness(1.06); }
-  .btn-lg { padding: 13px 22px; font-size: 14.5px; border-radius: 13px; }
-  .btn-sm { padding: 7px 12px; font-size: 12.5px; border-radius: 9px; }
-  .btn-block { width: 100%; }
+  .btn:hover:not(:disabled) { border-color: var(--ink); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-solid { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  .btn-solid:hover:not(:disabled) { filter: opacity(.85); }
+  .btn-quiet { border-color: transparent; background: none; color: var(--muted); padding: 6px 8px; }
+  .btn-quiet:hover:not(:disabled) { color: var(--ink); background: var(--faint); border-color: transparent; }
+  .btn-sm { padding: 6px 10px; font-size: 12.5px; }
+  .btn-wide { width: 100%; padding: 11px 14px; }
 
-  .link-btn {
-    background: none; border: 0; padding: 0; cursor: pointer;
-    font-size: 12.5px; font-weight: 600; color: var(--muted);
-    text-decoration: underline; text-underline-offset: 3px;
+  input[type="search"], select {
+    padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--surface); font-size: 13.5px; min-width: 0;
   }
-  .link-btn:hover { color: var(--vermilion); }
+  input[type="search"] { flex: 1; }
+  input[type="search"]:focus, select:focus { outline: none; border-color: var(--ink); }
+  input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
 
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-    padding: 4px 8px; border-radius: 6px;
-    background: var(--surface-2); color: var(--muted); border: 1px solid var(--line);
-    white-space: nowrap;
-  }
-  .badge-indigo { background: var(--indigo-soft); color: var(--indigo); border-color: transparent; }
-  .badge-vermilion { background: var(--vermilion-soft); color: var(--vermilion); border-color: transparent; }
-  .badge-green { background: var(--green-soft); color: var(--green); border-color: transparent; }
-  .badge-gold { background: var(--gold-soft); color: var(--gold); border-color: transparent; }
+  .bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+  .bar-spacer { flex: 1; }
 
-  .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; display: inline-block; }
-  .dot.new { background: transparent; border: 1.5px solid var(--line-strong); }
-  .dot.learning { background: var(--gold); }
-  .dot.mastered { background: var(--green); }
-
-  .status-line { display: flex; align-items: center; gap: 6px; font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-
-  /* ---------- Cards / home ---------- */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-  }
-
-  .hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 18px; }
-  .hero-copy {
-    position: relative; overflow: hidden;
-    padding: 42px 40px 36px;
-    border: 1px solid var(--line); border-radius: 24px;
-    background: linear-gradient(150deg, var(--surface), var(--surface-2));
-    box-shadow: var(--shadow);
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .hero-copy::before {
-    content: "日本語";
-    position: absolute; right: -26px; top: -56px;
-    writing-mode: vertical-rl;
-    font-family: var(--serif); font-size: 154px; line-height: .95;
-    letter-spacing: .03em; color: var(--indigo); opacity: .045;
-    pointer-events: none;
-  }
-  .hero-title {
-    position: relative;
-    font-family: var(--serif); font-size: clamp(34px, 4.6vw, 52px);
-    line-height: 1.04; letter-spacing: -.025em; margin: 14px 0 15px;
-  }
-  .hero-title em { font-style: normal; color: var(--indigo); }
-  .hero-sub { position: relative; color: var(--muted); font-size: 15px; line-height: 1.68; max-width: 52ch; }
-  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 25px; }
-  .hero-meta {
-    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
-    margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line);
-    font-size: 12px; color: var(--muted);
-  }
-  .hero-meta b { color: var(--ink); }
-
-  .hero-art {
-    position: relative; overflow: hidden; min-height: 300px;
-    border-radius: 24px; border: 1px solid rgba(255, 255, 255, .08);
-    background:
-      radial-gradient(circle at 70% 20%, rgba(255, 255, 255, .14), transparent 45%),
-      linear-gradient(160deg, #33537c, #1a2d49 70%);
-    color: #f4ecdc;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-shadow: var(--shadow);
-  }
-  .hero-art::before {
-    content: ""; position: absolute; inset: 0; opacity: .16;
-    background-image: radial-gradient(circle at 50% 50%, transparent 0 26px, rgba(255, 255, 255, .5) 27px 28px, transparent 29px 54px, rgba(255, 255, 255, .35) 55px 56px, transparent 57px);
-    background-size: 110px 110px;
-  }
-  .hero-kanji { position: relative; font-family: var(--serif); font-size: clamp(96px, 13vw, 142px); line-height: 1; }
-  .hero-art-caption { position: relative; margin-top: 6px; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(244, 236, 220, .66); }
-  .seal {
-    position: absolute; right: 18px; bottom: 18px;
-    width: 46px; height: 46px; border: 1.5px solid rgba(244, 236, 220, .55); border-radius: 6px;
-    display: grid; place-items: center;
-    font-family: var(--serif); font-size: 13px; letter-spacing: .02em;
-    color: rgba(244, 236, 220, .82);
-    transform: rotate(-4deg);
-  }
-
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
-  .stat-card { padding: 17px 18px 15px; }
-  .stat-label { font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
-  .stat-value { font-family: var(--serif); font-size: 30px; line-height: 1.15; margin-top: 4px; letter-spacing: -.02em; }
-  .stat-value small { font-family: var(--font); font-size: 12px; color: var(--muted); letter-spacing: 0; font-weight: 600; }
-  .stat-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-  .stat-card.accent .stat-value { color: var(--vermilion); }
-
-  .bar { height: 5px; border-radius: 999px; background: var(--bg-2); overflow: hidden; margin-top: 10px; }
-  .bar > span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--indigo), #6e8fb8); transition: width .4s ease; }
-  .bar.green > span { background: linear-gradient(90deg, #3d8d68, var(--green)); }
-  .bar.vermilion > span { background: linear-gradient(90deg, #cf705d, var(--vermilion)); }
-
-  .deck-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .deck-card { padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: transform .15s, box-shadow .15s, border-color .15s; }
-  .deck-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); border-color: var(--line-strong); }
-  .deck-top { display: flex; gap: 12px; align-items: flex-start; }
-  .deck-icon {
-    width: 46px; height: 46px; border-radius: 12px; flex: none;
-    display: grid; place-items: center;
-    font-family: var(--serif); font-size: 22px;
-    background: var(--indigo-soft); color: var(--indigo);
-  }
-  .deck-icon.vermilion { background: var(--vermilion-soft); color: var(--vermilion); }
-  .deck-icon.green { background: var(--green-soft); color: var(--green); }
-  .deck-name { font-weight: 800; font-size: 15px; letter-spacing: -.01em; }
-  .deck-jp { font-size: 11px; color: var(--muted); letter-spacing: .1em; margin-top: 1px; }
-  .deck-desc { font-size: 13px; line-height: 1.55; color: var(--muted); flex: 1; }
-  .deck-nums { display: flex; gap: 14px; font-size: 11.5px; color: var(--muted); }
-  .deck-nums b { color: var(--ink); font-weight: 700; }
-  .deck-actions { display: flex; gap: 8px; margin-top: 2px; }
-  .deck-actions .btn { flex: 1; }
-
-  .review-banner {
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    padding: 16px 20px; margin-top: 18px;
-    border: 1px solid rgba(187, 75, 55, .2); border-radius: 14px;
-    background: linear-gradient(100deg, var(--vermilion-soft), var(--surface));
-  }
-  .review-banner .icon {
-    width: 36px; height: 36px; border-radius: 50%; flex: none;
-    display: grid; place-items: center;
-    background: var(--vermilion); color: #fff; font-size: 17px;
-  }
-  .review-banner h3 { font-size: 14px; }
-  .review-banner p { font-size: 12.5px; color: var(--muted); }
-  .review-banner .btn { margin-left: auto; }
-
-  .how-card { padding: 22px 24px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: center; }
-  .how-card h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 6px; }
-  .how-card p { font-size: 13px; color: var(--muted); line-height: 1.65; }
-  .how-steps { display: flex; gap: 8px; flex-wrap: wrap; }
-  .how-step { font-size: 11.5px; font-weight: 700; background: var(--surface-2); border: 1px solid var(--line); padding: 7px 10px; border-radius: 8px; }
-
-  /* ---------- Toolbars ---------- */
-  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
-  .search { position: relative; flex: 1 1 280px; min-width: 200px; }
-  .search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); pointer-events: none; }
-  .search input {
-    width: 100%; padding: 11px 14px 11px 38px;
-    background: var(--surface); border: 1px solid var(--line); border-radius: 11px;
-    font-size: 14px; transition: border-color .15s, box-shadow .15s;
-  }
-  .search input::placeholder { color: var(--muted); opacity: .8; }
-  .search input::-webkit-search-cancel-button { -webkit-appearance: none; }
-  .search input:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px var(--indigo-soft); }
-  .control {
-    padding: 10px 12px; background: var(--surface); border: 1px solid var(--line);
-    border-radius: 11px; font-size: 13px; cursor: pointer; color: var(--ink);
-  }
-  .control:focus { outline: none; border-color: var(--indigo); box-shadow: 0 0 0 3px var(--indigo-soft); }
-
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
   .chip {
-    border: 1px solid var(--line); background: var(--surface);
-    border-radius: 999px; padding: 6px 12px;
-    font-size: 12px; font-weight: 700; color: var(--muted);
-    cursor: pointer; transition: background .15s, color .15s, border-color .15s;
-    white-space: nowrap;
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px;
+    background: none; font-size: 12.5px; color: var(--muted); cursor: pointer;
   }
   .chip:hover { border-color: var(--line-strong); color: var(--ink); }
-  .chip.active { background: var(--indigo); border-color: var(--indigo); color: #fff; }
-  [data-theme="dark"] .chip.active { color: var(--primary-ink); }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
-  .results-meta {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 14px; flex-wrap: wrap; margin: 4px 0 14px;
-    font-size: 12px; color: var(--muted);
+  /* lists */
+  .rows { border-top: 1px solid var(--line); }
+  .row {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 10px 0; border-bottom: 1px solid var(--line);
   }
-  .legend { display: flex; gap: 14px; flex-wrap: wrap; }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; }
+  .row .en { flex: 1; min-width: 0; font-size: 14px; }
+  .row .jp { font-size: 15.5px; white-space: nowrap; }
+  .row .jp.wide { white-space: normal; text-align: right; max-width: 62%; }
+  .row .meta { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+  .row .icon-btn { align-self: center; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--line-strong); flex: none; align-self: center; }
+  .dot.learning { background: #c19b46; }
+  .dot.mastered { background: var(--green); }
+  [data-theme="dark"] .dot.learning { background: #d3b062; }
 
-  /* ---------- Vocabulary ---------- */
-  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(246px, 1fr)); gap: 10px; }
-  .vocab-card {
-    position: relative; padding: 13px 14px 12px;
-    border: 1px solid var(--line); border-radius: 13px;
-    background: var(--surface);
-    transition: transform .14s, box-shadow .14s, border-color .14s;
+  /* home */
+  .home-title { font-size: clamp(28px, 5vw, 36px); font-weight: 600; letter-spacing: -.025em; margin: 4px 0 10px; }
+  .home-sub { color: var(--muted); max-width: 46ch; }
+  .home-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+  .quiet-list { border-top: 1px solid var(--line); margin-top: 40px; }
+  .quiet-row {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 13px 0; border-bottom: 1px solid var(--line);
+    text-decoration: none;
   }
-  .vocab-card:hover { transform: translateY(-1px); border-color: var(--line-strong); box-shadow: var(--shadow); }
-  .vocab-top { display: flex; align-items: flex-start; gap: 8px; justify-content: space-between; }
-  .vocab-en { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .015em; line-height: 1.4; }
-  .vocab-jp { font-size: 20px; line-height: 1.45; margin-top: 3px; word-break: break-word; }
-  .vocab-status { margin-top: 8px; }
-  .speak-btn { width: 27px; height: 27px; border-radius: 8px; flex: none; }
-  .speak-btn svg { width: 14px; height: 14px; }
+  .quiet-row .label { flex: 1; font-size: 15px; }
+  .quiet-row .n { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  .quiet-row:hover .label { text-decoration: underline; text-underline-offset: 3px; }
+  .stats-line { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); margin-top: 14px; }
 
-  /* ---------- Kanji ---------- */
-  .kanji-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 10px; }
-  .kanji-tile {
-    position: relative; text-align: left; cursor: pointer;
-    padding: 15px 15px 13px; border: 1px solid var(--line); border-radius: 14px;
-    background: var(--surface); color: var(--ink);
-    transition: transform .14s, box-shadow .14s, border-color .14s;
+  /* details (kanji) */
+  .krow { border-bottom: 1px solid var(--line); }
+  .krow > summary {
+    display: flex; align-items: center; gap: 16px; padding: 10px 0;
+    cursor: pointer; list-style: none;
   }
-  .kanji-tile:hover { transform: translateY(-2px); border-color: var(--line-strong); box-shadow: var(--shadow); }
-  .kanji-glyph { display: block; font-family: var(--serif); font-size: 44px; line-height: 1.1; }
-  .kanji-mean { display: -webkit-box; font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .kanji-tile .status-line { display: flex; }
-  .kanji-num { position: absolute; top: 11px; right: 11px; }
-  .kanji-tile .status-line { margin-top: 9px; font-size: 9.5px; }
+  .krow > summary::-webkit-details-marker { display: none; }
+  .krow > summary:hover .kanji { opacity: .6; }
+  .kanji { font-family: var(--serif); font-size: 26px; line-height: 1.1; width: 34px; flex: none; }
+  .krow .mean { flex: 1; font-size: 14px; }
+  .krow .read { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+  .kbody { padding: 4px 0 18px 50px; font-size: 13.5px; color: var(--muted); }
+  .kbody dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0 0 10px; }
+  .kbody dt { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  .kbody dd { margin: 0; color: var(--ink); }
+  .words { display: grid; gap: 3px; }
+  .words span { display: block; }
+  .words b { font-weight: 500; }
+  .kbody .note { margin-top: 10px; padding-left: 10px; border-left: 2px solid var(--line); }
+  .kbody .sources { margin-top: 10px; font-size: 12px; }
+  .kbody .sources summary { cursor: pointer; }
+  .kbody .sources li { margin: 2px 0; }
 
-  /* ---------- Grammar ---------- */
-  .pattern-list { display: grid; gap: 13px; }
-  .pattern-card { padding: 22px 24px; }
-  .pattern-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 9px; }
-  .pattern-meta .cat { font-size: 11px; color: var(--muted); }
-  .pattern-name { font-size: 14px; font-weight: 800; letter-spacing: -.005em; margin-bottom: 5px; }
-  .pattern-line {
-    font-size: clamp(19px, 2.4vw, 24px); line-height: 1.55;
-    letter-spacing: .005em; word-break: break-word;
-  }
-  .pattern-english { color: var(--muted); font-size: 13.5px; margin-top: 3px; max-width: 82ch; }
-  .formation {
-    margin-top: 13px; padding: 11px 13px;
-    background: var(--surface-2); border-radius: 10px;
-    font-size: 12.8px; line-height: 1.62; color: var(--muted);
-    max-width: 82ch;
-  }
-  .formation b { display: block; font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--ink); margin-bottom: 3px; }
-  .example {
-    margin-top: 13px; padding: 12px 15px;
-    background: var(--indigo-soft); border-left: 3px solid var(--indigo);
-    border-radius: 0 10px 10px 0;
-  }
-  .example-row { display: flex; align-items: flex-start; gap: 9px; }
-  .ex-tag { font-size: 9.5px; font-weight: 800; letter-spacing: .1em; background: var(--indigo); color: #fff; border-radius: 4px; padding: 2px 5px; margin-top: 5px; flex: none; }
-  [data-theme="dark"] .ex-tag { color: var(--primary-ink); }
-  .example-jp { font-size: 16.5px; line-height: 1.55; flex: 1; }
-  .example-en { font-size: 12.5px; color: var(--muted); margin-top: 3px; padding-left: 30px; }
-  .variant { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
-  .variant .ex-tag { background: var(--vermilion); }
-  .variant .example { background: var(--vermilion-soft); border-left-color: var(--vermilion); margin-top: 7px; }
-  .note {
-    margin-top: 12px; padding: 10px 13px; border-radius: 10px;
-    background: var(--gold-soft); font-size: 12px; line-height: 1.6; color: var(--ink);
-    display: flex; gap: 9px;
-  }
-  .note b { flex: none; }
-  .sources { margin-top: 12px; font-size: 11.5px; color: var(--muted); }
-  .sources summary { cursor: pointer; font-weight: 700; letter-spacing: .02em; }
-  .sources ul { padding-left: 18px; margin-top: 6px; }
-  .sources li { margin: 2px 0; }
+  /* grammar */
+  .pattern { padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .pattern .cat { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .pattern .name { font-size: 14px; margin-top: 3px; }
+  .pattern .jp-pattern { font-size: 19px; line-height: 1.5; margin-top: 8px; }
+  .pattern .en-pattern { color: var(--muted); font-size: 13.5px; }
+  .pattern .ex { margin-top: 10px; font-size: 14px; }
+  .pattern .ex small { color: var(--muted); font-size: 12.5px; }
+  .pattern details { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .pattern details summary { cursor: pointer; color: var(--ink); font-size: 12.5px; }
+  .pattern details p { margin-top: 6px; }
+  .pattern .variant { margin-top: 10px; padding-left: 12px; border-left: 2px solid var(--line); }
+  .pattern .speak { margin-left: 6px; vertical-align: -3px; }
 
-  /* ---------- Study setup ---------- */
-  .setup-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 18px; align-items: start; }
-  .setup-card { padding: 26px; }
-  .field { margin-bottom: 21px; }
-  .field-label { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .field-label span { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; color: var(--muted); }
-  .field-label em { font-style: normal; font-size: 11.5px; color: var(--muted); }
-  .seg { display: flex; gap: 6px; flex-wrap: wrap; }
-  .seg-btn {
-    border: 1.5px solid var(--line); background: var(--surface);
-    border-radius: 10px; padding: 9px 13px;
-    font-size: 12.5px; font-weight: 700; color: var(--muted);
-    cursor: pointer; transition: all .15s; text-align: left;
+  /* study setup */
+  .setup { display: grid; gap: 26px; max-width: 560px; }
+  .field label { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg button {
+    padding: 7px 12px; border: 1px solid var(--line-strong); border-radius: var(--radius);
+    background: var(--surface); font-size: 13px; cursor: pointer;
   }
-  .seg-btn:hover { border-color: var(--line-strong); color: var(--ink); }
-  .seg-btn.active { border-color: var(--indigo); background: var(--indigo-soft); color: var(--indigo); }
-  .seg-btn small { display: block; font-size: 10px; font-weight: 600; color: var(--muted); margin-top: 1px; }
-  .seg-btn.active small { color: var(--indigo); opacity: .8; }
+  .seg button:hover { border-color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .start-note { font-size: 12.5px; color: var(--muted); }
 
-  .setup-summary {
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    padding: 13px 15px; border-radius: 11px;
-    background: var(--surface-2); border: 1px dashed var(--line-strong);
-    font-size: 12.5px; color: var(--muted); margin-bottom: 14px;
+  /* session */
+  .session-top { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .track { flex: 1; height: 2px; background: var(--line); }
+  .track span { display: block; height: 100%; background: var(--ink); transition: width .25s ease; }
+  .pos { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .quiz { padding: 8px 0 0; }
+  .q-label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .q-text { font-size: clamp(24px, 4vw, 30px); line-height: 1.35; letter-spacing: -.015em; margin: 10px 0 26px; }
+  .q-text.jp { line-height: 1.45; letter-spacing: 0; }
+  .q-text.small { font-size: clamp(18px, 2.8vw, 22px); }
+  .q-text.glyph { font-family: var(--serif); font-size: clamp(52px, 9vw, 72px); margin-bottom: 22px; }
+
+  .answers { display: grid; gap: 7px; }
+  .answer {
+    display: flex; align-items: baseline; gap: 12px;
+    width: 100%; padding: 11px 13px; text-align: left;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--surface); font-size: 14px; cursor: pointer; line-height: 1.45;
   }
-  .setup-summary b { font-family: var(--serif); font-size: 21px; color: var(--ink); }
-  .setup-summary .dot-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--line-strong); }
+  .answer:hover:not(:disabled) { border-color: var(--ink); }
+  .answer:disabled { cursor: default; }
+  .answer .k { font-size: 11px; color: var(--muted); min-width: 10px; }
+  .answer .t { flex: 1; }
+  .answer.jp .t { font-size: 16px; }
+  .answer.kanji .t { font-family: var(--serif); font-size: 22px; }
+  .answer.long .t { font-size: 13px; }
+  .answer.ok { border-color: var(--green); }
+  .answer.ok .k { color: var(--green); }
+  .answer.no { border-color: var(--red); }
+  .answer.no .k { color: var(--red); }
+  .answer.dim { color: var(--muted); }
 
-  .study-aside { padding: 22px; }
-  .study-aside h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 7px; }
-  .study-aside p { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
-  .due-list { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 7px; }
-  .due-list li { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 12.5px; padding-bottom: 7px; border-bottom: 1px dashed var(--line); }
-  .due-list li:last-child { border-bottom: 0; padding-bottom: 0; }
-  .due-list b { font-size: 13.5px; }
-  .kbd-hint { font-size: 11.5px; color: var(--muted); margin-top: 12px; line-height: 1.7; }
+  .after { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .verdict { font-size: 14px; font-weight: 600; }
+  .verdict .ja { font-family: var(--serif); font-weight: 400; }
+  .verdict.ok { color: var(--green); }
+  .verdict.no { color: var(--red); }
+  .after .detail { margin-top: 5px; font-size: 13.5px; color: var(--muted); }
+  .after .detail .jp { color: var(--ink); }
+  .after .buttons { display: flex; gap: 8px; margin-top: 16px; }
+  .shortcut { margin-top: 20px; font-size: 11.5px; color: var(--muted); text-align: center; }
   kbd {
-    display: inline-block; min-width: 18px; text-align: center;
-    padding: 1px 5px; border-radius: 4px; border: 1px solid var(--line-strong);
-    background: var(--surface); font-family: inherit; font-size: 10px; font-weight: 700;
-    box-shadow: 0 1px 0 var(--line); color: var(--ink);
+    font-family: inherit; font-size: 10.5px; padding: 1px 5px;
+    border: 1px solid var(--line); border-radius: 3px; color: var(--muted);
   }
 
-  /* ---------- Session ---------- */
-  .session { max-width: 800px; margin: 0 auto; }
-  .session-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; }
-  .session-title { font-family: var(--serif); font-size: 19px; line-height: 1.2; }
-  .session-title small { display: block; font-family: var(--font); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
-  .session-progress { flex: 1; min-width: 130px; height: 7px; background: var(--bg-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
-  .session-progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--indigo), #7d9cc4); border-radius: inherit; transition: width .3s ease; }
-  .session-counter { font-size: 11.5px; font-weight: 800; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-  .quiz-card { padding: 30px 32px 26px; border-radius: 20px; }
-  .quiz-meta { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-bottom: 18px; }
-  .quiz-meta .spacer { flex: 1; }
-  .quiz-prompt {
-    font-size: clamp(27px, 4.2vw, 40px); line-height: 1.3; text-align: center;
-    letter-spacing: -.012em; margin: 8px 0 26px; word-break: break-word;
-  }
-  .quiz-prompt.jp { line-height: 1.45; letter-spacing: .01em; }
-  .quiz-prompt.medium { font-size: clamp(19px, 2.7vw, 25px); line-height: 1.55; }
-  .quiz-prompt.glyph { font-family: var(--serif); font-size: clamp(66px, 10vw, 96px); line-height: 1.1; margin-bottom: 18px; }
-  .prompt-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: -18px; margin-bottom: 22px; }
-
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
-  .option {
-    display: flex; align-items: center; gap: 11px;
-    width: 100%; padding: 13px 14px;
-    border: 1.5px solid var(--line); border-radius: 12px;
-    background: var(--surface); color: var(--ink);
-    font-size: 14.5px; line-height: 1.45; text-align: left;
-    cursor: pointer; transition: border-color .14s, background .14s, transform .1s;
-    min-height: 54px;
-  }
-  .option:hover:not(:disabled) { border-color: var(--indigo); background: var(--indigo-soft); }
-  .option:active:not(:disabled) { transform: scale(.995); }
-  .option:disabled { cursor: default; }
-  .option .key {
-    width: 22px; height: 22px; flex: none; border-radius: 6px;
-    border: 1px solid var(--line); background: var(--surface-2);
-    display: grid; place-items: center;
-    font-size: 10px; font-weight: 800; color: var(--muted);
-  }
-  .option .opt-text { flex: 1; word-break: break-word; }
-  .option.jp .opt-text { font-size: 17px; }
-  .option.kanji .opt-text { font-family: var(--serif); font-size: 24px; }
-  .option.long .opt-text { font-size: 12.8px; line-height: 1.5; }
-  .option.correct { border-color: var(--green); background: var(--green-soft); }
-  .option.correct .key { border-color: var(--green); color: var(--green); }
-  .option.wrong { border-color: var(--red); background: var(--red-soft); }
-  .option.wrong .key { border-color: var(--red); color: var(--red); }
-  .option.dim { opacity: .62; }
-
-  .feedback {
-    margin-top: 16px; padding: 16px 18px;
-    border: 1px solid var(--line); border-radius: 14px;
-    animation: rise .25s ease both;
-  }
-  .feedback.ok { background: var(--green-soft); border-color: rgba(47, 125, 91, .28); }
-  .feedback.bad { background: var(--red-soft); border-color: rgba(183, 64, 47, .26); }
-  .feedback-head { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
-  .feedback-head b { font-family: var(--serif); font-size: 20px; }
-  .feedback.ok .feedback-head b { color: var(--green); }
-  .feedback.bad .feedback-head b { color: var(--red); }
-  .feedback-body { font-size: 13px; line-height: 1.65; }
-  .feedback-body .jp { font-size: 15px; }
-  .feedback-foot { display: flex; justify-content: flex-end; margin-top: 12px; }
-  .feedback .speak-btn { border-color: rgba(0, 0, 0, .08); }
-
-  /* Flashcards */
-  .flashcard { perspective: 1500px; width: 100%; min-height: 370px; cursor: pointer; border: 0; background: transparent; padding: 0; display: block; text-align: inherit; }
-  .flash-inner { position: relative; width: 100%; min-height: 370px; transform-style: preserve-3d; transition: transform .52s cubic-bezier(.2, .7, .2, 1); }
-  .flashcard.flipped .flash-inner { transform: rotateY(180deg); }
-  .flash-face {
-    position: absolute; inset: 0;
-    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  /* flashcards */
+  .card-face {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; gap: 10px; padding: 32px;
-    border: 1px solid var(--line); border-radius: 22px;
-    background: var(--surface); box-shadow: var(--shadow);
-    overflow: auto;
+    gap: 10px; min-height: 260px; padding: 30px 20px; text-align: center;
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    cursor: pointer; width: 100%;
   }
-  .flash-face.back { transform: rotateY(180deg); background: linear-gradient(160deg, var(--surface), var(--surface-2)); }
-  .flash-face { pointer-events: none; }
-  .flashcard .flash-face.front { pointer-events: auto; }
-  .flashcard.flipped .flash-face.front { pointer-events: none; }
-  .flashcard.flipped .flash-face.back { pointer-events: auto; }
-  .flash-main.small { font-size: clamp(20px, 3.2vw, 27px); line-height: 1.45; }
-  .flash-label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
-  .flash-main { font-size: clamp(30px, 5.4vw, 46px); line-height: 1.35; letter-spacing: -.01em; word-break: break-word; }
-  .flash-main.jp { letter-spacing: .01em; }
-  .flash-sub { font-size: 14px; color: var(--muted); line-height: 1.6; }
-  .flash-hint { position: absolute; bottom: 16px; left: 0; right: 0; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); opacity: .8; }
-  .flash-face .speak-btn { width: 40px; height: 40px; border-radius: 11px; }
-  .flash-face .speak-btn svg { width: 18px; height: 18px; }
-  .flash-details { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 54ch; }
-  .flash-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-  .flash-controls .btn { padding: 14px; font-size: 14px; }
-  .flash-controls .btn[disabled] { opacity: .45; }
+  .card-face:hover { border-color: var(--line-strong); }
+  .card-label { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+  .card-big { font-size: clamp(24px, 4.2vw, 32px); line-height: 1.4; letter-spacing: -.01em; }
+  .card-big.jp { letter-spacing: 0; }
+  .card-big.glyph { font-family: var(--serif); font-size: 76px; line-height: 1.15; }
+  .card-sub { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 46ch; }
+  .card-hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .card-actions .btn { padding: 12px; }
 
-  /* Results */
-  .results { padding: 32px; text-align: center; }
-  .score-ring {
-    width: 132px; height: 132px; border-radius: 50%; margin: 4px auto 18px;
-    display: grid; place-items: center;
-    background: conic-gradient(var(--green) calc(var(--pct) * 1%), var(--bg-2) 0);
-    position: relative;
-  }
-  .score-ring::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--surface); }
-  .score-ring span { position: relative; font-family: var(--serif); font-size: 33px; letter-spacing: -.02em; }
-  .results h2 { font-family: var(--serif); font-size: clamp(25px, 4vw, 34px); letter-spacing: -.015em; }
-  .results .results-sub { color: var(--muted); font-size: 13.5px; margin-top: 6px; }
-  .result-stats { display: flex; justify-content: center; gap: 28px; margin: 22px 0; flex-wrap: wrap; }
-  .result-stat b { display: block; font-family: var(--serif); font-size: 25px; line-height: 1.2; }
-  .result-stat span { font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
-  .result-actions { display: flex; justify-content: center; gap: 9px; flex-wrap: wrap; margin-top: 8px; }
-  .missed { text-align: left; margin-top: 26px; border-top: 1px dashed var(--line); padding-top: 20px; }
-  .missed h3 { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .missed-list { display: grid; gap: 7px; }
-  .missed-row { display: flex; align-items: center; gap: 10px; padding: 9px 11px; background: var(--surface-2); border-radius: 9px; font-size: 13.5px; }
-  .missed-row .jp { font-size: 15px; }
-  .missed-row .en { color: var(--muted); font-size: 12px; }
-  .missed-row .spacer { flex: 1; }
+  /* results */
+  .result { max-width: 480px; }
+  .result .score { font-size: 56px; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+  .result .score small { font-size: 15px; color: var(--muted); font-weight: 400; letter-spacing: 0; margin-left: 6px; }
+  .result .muted { color: var(--muted); font-size: 13.5px; }
+  .result .buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+  .result h3 { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin: 30px 0 6px; font-weight: 600; }
 
-  .empty {
-    padding: 46px 24px; text-align: center;
-    border: 1px dashed var(--line-strong); border-radius: 16px;
-    background: var(--surface-2); color: var(--muted);
+  /* sentence mode */
+  .sent-frame {
+    font-size: clamp(21px, 3.4vw, 27px); line-height: 1.6;
+    padding: 22px 0 4px;
   }
-  .empty .big { font-family: var(--serif); font-size: 36px; color: var(--ink); margin-bottom: 6px; }
-  .empty p { font-size: 13px; }
-  .empty .btn { margin-top: 14px; }
+  .sent-frame .hl { border-bottom: 1.5px solid var(--ink); padding-bottom: 1px; }
+  .sent-frame .fill {
+    display: inline-block; min-width: 74px; border-bottom: 1.5px solid var(--ink);
+    color: var(--muted); text-align: center;
+  }
+  .sent-en { color: var(--muted); font-size: 14px; margin-top: 10px; }
+  .sent-source { font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-top: 20px; }
 
-  /* ---------- Modal ---------- */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 90;
-    background: rgba(23, 20, 15, .5);
-    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-    display: flex; align-items: center; justify-content: center;
-    padding: 22px; animation: fade .18s ease both;
-  }
-  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-  .modal {
-    width: min(720px, 100%); max-height: min(86vh, 860px); overflow: auto;
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 20px; box-shadow: var(--shadow-lg);
-    padding: 24px 26px 26px;
-    animation: rise .24s ease both;
-  }
-  .modal-top { display: flex; align-items: flex-start; gap: 16px; }
-  .kanji-hero {
-    width: 92px; height: 92px; flex: none;
-    display: grid; place-items: center;
-    font-family: var(--serif); font-size: 54px; line-height: 1;
-    background: var(--surface-2); border: 1px solid var(--line); border-radius: 16px;
-  }
-  .modal-top h2 { font-family: var(--serif); font-size: 26px; line-height: 1.2; letter-spacing: -.01em; }
-  .modal-top .modal-sub { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
-  .modal-close { margin-left: auto; }
-  .modal-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-  .modal-section { margin-top: 22px; }
-  .modal-section h3 {
-    font-size: 10.5px; letter-spacing: .15em; text-transform: uppercase;
-    color: var(--muted); font-weight: 800; margin-bottom: 8px;
-  }
-  .reading-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .reading-box { padding: 11px 13px; background: var(--surface-2); border-radius: 10px; }
-  .reading-box .label { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-bottom: 3px; }
-  .reading-box .val { font-size: 16px; line-height: 1.5; }
-  .reading-table { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .reading-row { display: grid; grid-template-columns: 1.1fr 1fr .8fr 1.3fr; gap: 10px; padding: 9px 11px; background: var(--surface); font-size: 12px; }
-  .reading-row.head { background: var(--surface-2); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 800; }
-  .reading-row .jp { font-size: 13.5px; line-height: 1.5; }
-  .modal-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line); }
+  /* misc */
+  .empty { padding: 40px 0; color: var(--muted); font-size: 14px; }
+  .toasts { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 60; display: grid; gap: 6px; width: min(90vw, 360px); }
+  .toast { background: var(--ink); color: var(--bg); padding: 9px 13px; border-radius: var(--radius); font-size: 12.5px; text-align: center; }
+  .foot { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--muted); }
+  .foot button { font-size: 11.5px; }
+  .note-storage { font-size: 11.5px; color: var(--muted); }
 
-  .modal-open { overflow: hidden; }
+  .load, .fail { padding: 60px 0; text-align: center; color: var(--muted); font-size: 14px; }
+  .fail { text-align: left; max-width: 520px; }
+  .fail h2 { font-size: 17px; color: var(--ink); font-weight: 600; margin-bottom: 8px; }
+  .fail p { margin-bottom: 8px; }
+  .fail code { font-size: 12.5px; background: var(--faint); padding: 1px 5px; border-radius: 3px; }
 
-  /* ---------- Loading / error ---------- */
-  .loading { display: grid; gap: 14px; max-width: 720px; margin: 60px auto; text-align: center; }
-  .loading .spinner {
-    width: 34px; height: 34px; margin: 0 auto 8px;
-    border: 3px solid var(--line); border-top-color: var(--indigo);
-    border-radius: 50%; animation: spin .8s linear infinite;
+  @media (max-width: 620px) {
+    .shell, .top-in { padding-left: 16px; padding-right: 16px; }
+    .top-in { gap: 14px; }
+    .nav { gap: 13px; }
+    .nav a { font-size: 13px; }
+    .streak { display: none; }
+    .row { gap: 10px; }
+    .row .en { font-size: 13.5px; }
+    .row .jp { font-size: 14.5px; }
+    .row .jp.wide { max-width: 56%; }
+    .kbody { padding-left: 0; }
+    .card-face { min-height: 220px; }
+    .result .score { font-size: 46px; }
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading h2 { font-family: var(--serif); font-size: 24px; }
-  .loading p { color: var(--muted); font-size: 13px; }
-  .error-card { max-width: 640px; margin: 50px auto; padding: 30px; text-align: center; }
-  .error-card h2 { font-family: var(--serif); font-size: 26px; margin-bottom: 8px; }
-  .error-card p { color: var(--muted); font-size: 13.5px; line-height: 1.7; }
-  .error-card code { background: var(--surface-2); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; font-size: 12px; }
-  .error-card .btn { margin-top: 16px; }
-
-  /* ---------- Toasts ---------- */
-  .toasts { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 120; display: grid; gap: 8px; width: min(92vw, 420px); pointer-events: none; }
-  .toast {
-    background: var(--ink); color: var(--bg);
-    padding: 11px 15px; border-radius: 10px; font-size: 12.5px; font-weight: 600;
-    box-shadow: var(--shadow-lg); text-align: center;
-    animation: toastIn .22s ease both;
-  }
-  @keyframes toastIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-
-  /* ---------- Footer ---------- */
-  .site-footer { border-top: 1px solid var(--line); background: var(--surface-2); }
-  .footer-inner {
-    max-width: 1120px; margin: 0 auto; padding: 20px 24px 28px;
-    display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;
-    font-size: 11.5px; color: var(--muted);
-  }
-  .footer-inner strong { color: var(--ink); }
-  .footer-actions { display: flex; align-items: center; gap: 16px; }
-
-  /* ---------- Responsive ---------- */
-  @media (max-width: 960px) {
-    .topbar-inner { flex-wrap: wrap; gap: 8px 12px; padding: 10px 18px; }
-    .main-nav { order: 3; width: 100%; margin-left: 0; justify-content: space-between; overflow-x: auto; }
-    .main-nav a { flex: 1; text-align: center; padding: 7px 8px; }
-    .top-actions { margin-left: auto; }
-    .wrap { padding: 26px 18px 68px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-art { min-height: 190px; }
-    .hero-kanji { font-size: 92px; }
-    .stats { grid-template-columns: 1fr 1fr; }
-    .deck-grid { grid-template-columns: 1fr; }
-    .deck-card { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; }
-    .deck-card .deck-top, .deck-card .deck-desc, .deck-card .deck-nums, .deck-card .bar { grid-column: 1; }
-    .deck-card .deck-actions { grid-column: 2; grid-row: 1 / span 4; flex-direction: column; align-self: center; }
-    .deck-card .bar { margin-top: 2px; }
-    .how-card { grid-template-columns: 1fr; gap: 14px; }
-    .setup-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 700px) {
-    body { font-size: 15.5px; }
-    .brand-sub { display: none; }
-    .brand-title { font-size: 15px; }
-    .brand-mark { width: 38px; height: 38px; font-size: 21px; border-radius: 11px; }
-    .streak-pill { display: none !important; }
-    .main-nav a { font-size: 12px; }
-    .main-nav a[data-nav="home"] { display: none; }
-    .hero-copy { padding: 30px 22px 26px; }
-    .hero-copy::before { font-size: 110px; }
-    .hero-title { font-size: 35px; }
-    .stat-value { font-size: 25px; }
-    .stat-card { padding: 14px; }
-    .page-head h1 { font-size: 32px; }
-    .head-stats { display: none; }
-    .options { grid-template-columns: 1fr; }
-    .quiz-card { padding: 22px 18px 20px; }
-    .quiz-prompt { margin-bottom: 20px; }
-    .pattern-card { padding: 18px 17px; }
-    .vocab-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .vocab-card { padding: 11px 12px; }
-    .vocab-jp { font-size: 18px; }
-    .vocab-en { font-size: 11px; }
-    .kanji-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; }
-    .kanji-tile { padding: 12px 12px 10px; }
-    .kanji-glyph { font-size: 38px; }
-    .kanji-mean { font-size: 10.5px; }
-    .setup-card { padding: 18px; }
-    .modal { padding: 20px 18px 22px; }
-    .kanji-hero { width: 68px; height: 68px; font-size: 40px; }
-    .modal-top h2 { font-size: 22px; }
-    .reading-grid { grid-template-columns: 1fr; }
-    .reading-row { grid-template-columns: 1fr 1fr; }
-    .reading-row.head { display: none; }
-    .reading-row > div:nth-child(4) { grid-column: 1 / -1; color: var(--muted); }
-    .flash-card, .flash-inner, .flashcard { min-height: 330px; }
-    .flash-face { padding: 22px 18px; }
-    .results { padding: 24px 18px; }
-    .deck-card { grid-template-columns: 1fr; }
-    .deck-card .deck-actions { grid-column: 1; grid-row: auto; flex-direction: row; }
-    .review-banner .btn { margin-left: 0; width: 100%; }
-  }
-
-  @media (max-width: 420px) {
-    .vocab-grid { grid-template-columns: 1fr; }
-    .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .main-nav { padding: 3px; }
-    .main-nav a { padding: 6px 4px; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    * { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="#home" aria-label="Year 8 Japanese home">
-      <span class="brand-mark" aria-hidden="true">学</span>
-      <span class="brand-text">
-        <span class="brand-title">Year 8 Japanese</span>
-        <span class="brand-sub">Study companion</span>
-      </span>
-    </a>
-    <nav class="main-nav" aria-label="Sections">
+<header class="top">
+  <div class="top-in">
+    <a class="mark" href="#home" aria-label="Home">学</a>
+    <nav class="nav" aria-label="Sections">
       <a href="#home" data-nav="home">Home</a>
-      <a href="#vocab" data-nav="vocab">Vocabulary</a>
+      <a href="#vocab" data-nav="vocab">Vocab</a>
       <a href="#kanji" data-nav="kanji">Kanji</a>
       <a href="#grammar" data-nav="grammar">Grammar</a>
       <a href="#study" data-nav="study">Study</a>
     </nav>
-    <div class="top-actions">
-      <span class="streak-pill" id="streak-pill" hidden></span>
-      <button type="button" class="icon-btn theme-toggle" id="theme-toggle" data-action="theme" aria-label="Switch colour theme" title="Switch light / dark">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.6 8.6 0 1 1 9.5 3.5a6.9 6.9 0 0 0 11 11Z"/></svg>
+    <div class="top-end">
+      <span class="streak" id="streak" hidden></span>
+      <button type="button" class="icon-btn theme-toggle" id="theme-toggle" data-action="theme" aria-label="Toggle theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 1 1 9.5 4 6.6 6.6 0 0 0 20 14.5Z"/></svg>
       </button>
     </div>
   </div>
 </header>
 
-<main id="main" class="wrap" tabindex="-1">
-  <div id="view">
-    <div class="loading">
-      <div class="spinner" aria-hidden="true"></div>
-      <h2>Loading your study desk…</h2>
-      <p>Fetching vocabulary, kanji and grammar patterns.</p>
-    </div>
-  </div>
+<main class="shell" id="main">
+  <div id="view"><p class="load">Loading…</p></div>
+  <footer class="foot">
+    <span class="note-storage" id="storage-note">Progress is stored in this browser</span>
+    <button type="button" class="btn btn-quiet btn-sm" data-action="reset">Reset progress</button>
+  </footer>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div><strong>Year 8 Japanese</strong> · Vocabulary, kanji and grammar from your class material.</div>
-    <div class="footer-actions">
-      <span id="storage-note">Progress is saved in this browser</span>
-      <button type="button" class="link-btn" data-action="reset">Reset progress</button>
-    </div>
-  </div>
-</footer>
-
-<div id="modal-root"></div>
-<div class="toasts" id="toasts" aria-live="polite" aria-atomic="true"></div>
-
-<noscript>
-  <div style="max-width:640px;margin:40px auto;padding:24px;border:1px solid #ddd;border-radius:12px;font-family:sans-serif">
-    This study app needs JavaScript enabled to load the vocabulary, kanji and grammar data.
-  </div>
-</noscript>
+<div class="toasts" id="toasts" aria-live="polite"></div>
 
 <script>
 (function () {
   'use strict';
 
-  /* ------------------------------------------------------------------ *
-   *  Constants & state
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Constants
+   * ---------------------------------------------------------------- */
 
   var DAY = 86400000;
   var INTERVALS = { 1: 0, 2: 1, 3: 2, 4: 4, 5: 7 };
   var STORE_KEY = 'jp8-japanese-study-v1';
   var ROUTES = ['home', 'vocab', 'kanji', 'grammar', 'study'];
-
-  var DECK_META = {
-    vocab: {
-      name: 'Vocabulary', jp: '単語', glyph: '単', tone: '',
-      desc: 'Animals, activities, countries, food, family and everyday classroom language.'
-    },
-    kanji: {
-      name: 'Kanji', jp: '漢字', glyph: '漢', tone: 'vermilion',
-      desc: 'Every character in the course, with readings and the words it appears in.'
-    },
-    structures: {
-      name: 'Grammar', jp: '文法', glyph: '文', tone: 'green',
-      desc: 'Sentence and question patterns, verb forms and noun modification.'
-    }
-  };
-
-  var TYPE_META = {
-    sentence_pattern: { label: 'Sentence pattern', tone: 'badge-indigo' },
-    question_pattern: { label: 'Question pattern', tone: 'badge-vermilion' },
-    grammar_formation: { label: 'Grammar formation', tone: 'badge-green' },
-    noun_modification: { label: 'Noun modification', tone: 'badge-gold' }
-  };
+  var DECK_NAMES = { vocab: 'Vocabulary', kanji: 'Kanji', structures: 'Grammar', sentences: 'Sentences', mixed: 'Everything' };
 
   var ICON = {
-    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></svg>',
-    speak: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.2 9H3v6h3.2L11 19V5Z" fill="currentColor"/><path d="M15 8.7a4.6 4.6 0 0 1 0 6.6M17.7 5.9a8.4 8.4 0 0 1 0 12.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
-    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>'
+    speak: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.2 9H3v6h3.2L11 19V5Z" fill="currentColor"/><path d="M15 8.7a4.6 4.6 0 0 1 0 6.6M17.7 5.9a8.4 8.4 0 0 1 0 12.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'
   };
 
   var state = {
     loaded: false,
     error: null,
-    raw: {},
     items: { vocab: [], kanji: [], structures: [] },
     byId: new Map(),
+    byType: {},
+    structuresById: {},
     progress: {},
     activity: {},
     settings: { theme: null },
     route: '',
     session: null,
-    modal: null,
-    ui: {
-      vocabQuery: '',
-      vocabSort: 'en',
-      kanjiQuery: '',
-      kanjiFilter: 'all',
-      structQuery: '',
-      structCat: 'all',
-      structType: 'all'
-    },
-    setup: {
-      deck: 'vocab',
-      mode: 'quiz',
-      scope: 'smart',
-      count: 10,
-      direction: 'mixed'
-    }
+    ui: { vocabQuery: '', kanjiQuery: '', structQuery: '' },
+    setup: { mode: 'quiz', deck: 'vocab', scope: 'smart', count: 10, direction: 'mixed', group: 'all' }
   };
 
   var storageOK = true;
 
-  /* ------------------------------------------------------------------ *
-   *  Small helpers
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Utilities
+   * ---------------------------------------------------------------- */
 
   function $(sel, root) { return (root || document).querySelector(sel); }
   function $all(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-
-  function hasJa(text) {
-    return /[\u3040-\u30ff\u3400-\u9fff\uff66-\uff9f]/.test(String(text || ''));
-  }
-
-  function shuffle(arr) {
-    var a = arr.slice();
+  function hasJa(text) { return /[\u3040-\u30ff\u3400-\u9fff]/.test(String(text || '')); }
+  function shuffle(list) {
+    var a = list.slice();
     for (var i = a.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var t = a[i]; a[i] = a[j]; a[j] = t;
     }
     return a;
   }
-
-  function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
-
-  function percent(part, total) {
-    if (!total) return 0;
-    return Math.round((part / total) * 100);
-  }
-
+  function pick(list) { return list[Math.floor(Math.random() * list.length)]; }
+  function percent(part, total) { return total ? Math.round((part / total) * 100) : 0; }
   function dateKey(d) {
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
+  // "（お）てら" -> "てら", "バスケ / バスケットボール" -> "バスケ"
+  function primaryJp(text) {
+    return String(text || '')
+      .split(' / ')[0]
+      .replace(/[（(][^）)]*[）)]/g, '')
+      .replace(/\s+/g, '')
+      .trim();
+  }
+
+  // "Tonkatsu (crumbed pork schnitzel)" -> "tonkatsu"
+  function primaryEn(text) {
+    return String(text || '')
+      .replace(/[（(][^）)]*[）)]/g, '')
+      .split(/ *\/ */)[0]
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase();
+  }
+
   function speakBtn(text, label) {
     if (!text) return '';
-    return '<button type="button" class="icon-btn speak-btn" data-action="speak" data-speak="' +
-      esc(text) + '" aria-label="' + esc(label || 'Play pronunciation') + '" title="' +
-      esc(label || 'Play pronunciation') + '">' + ICON.speak + '</button>';
+    return '<button type="button" class="icon-btn" data-action="speak" data-speak="' + esc(text) +
+      '" aria-label="' + esc(label || 'Play audio') + '" title="' + esc(label || 'Play audio') + '">' + ICON.speak + '</button>';
   }
 
   function statusOf(id) {
@@ -1004,171 +457,134 @@
     return (p.b || 1) >= 4 ? 'mastered' : 'learning';
   }
 
-  function statusLabel(status) {
-    return status === 'mastered' ? 'Strong' : status === 'learning' ? 'Learning' : 'New';
-  }
-
-  function statusDot(status) {
-    return '<span class="dot ' + status + '" aria-hidden="true"></span>';
-  }
-
   function sourcesHtml(sources) {
     if (!sources || !sources.length) return '';
-    return '<details class="sources"><summary>Sources · ' + sources.length + '</summary><ul>' +
-      sources.map(function (src) {
-        var pages = src.pages && src.pages.length ? ' <span class="dim">pp. ' + src.pages.join(', ') + '</span>' : '';
-        return '<li>' + esc(src.document) + pages + '</li>';
+    return '<details class="sources"><summary>Sources</summary><ul>' +
+      sources.map(function (s) {
+        return '<li>' + esc(s.document) + (s.pages && s.pages.length ? ' · pp. ' + s.pages.join(', ') : '') + '</li>';
       }).join('') + '</ul></details>';
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Persistence
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Storage, theme
+   * ---------------------------------------------------------------- */
 
   function loadStore() {
     try {
       var raw = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
       if (raw.progress && typeof raw.progress === 'object') state.progress = raw.progress;
       if (raw.activity && typeof raw.activity === 'object') state.activity = raw.activity;
-      if (raw.settings && typeof raw.settings === 'object') {
-        state.settings = Object.assign(state.settings, raw.settings);
-      }
-    } catch (e) { /* storage blocked or corrupt — start fresh */ }
-
+      if (raw.settings && typeof raw.settings === 'object') state.settings = Object.assign(state.settings, raw.settings);
+    } catch (e) { /* ignore */ }
     try {
-      localStorage.setItem('__jp8_test__', '1');
-      localStorage.removeItem('__jp8_test__');
-    } catch (e) {
-      storageOK = false;
-    }
+      localStorage.setItem('__t', '1');
+      localStorage.removeItem('__t');
+    } catch (e) { storageOK = false; }
   }
 
   function saveStore() {
     if (!storageOK) return;
     try {
       localStorage.setItem(STORE_KEY, JSON.stringify({
-        progress: state.progress,
-        activity: state.activity,
-        settings: state.settings
+        progress: state.progress, activity: state.activity, settings: state.settings
       }));
-    } catch (e) {
-      storageOK = false;
-      updateStorageNote();
-    }
+    } catch (e) { storageOK = false; }
   }
-
-  function updateStorageNote() {
-    var el = $('#storage-note');
-    if (el && !storageOK) el.textContent = 'Progress cannot be saved in this browser';
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Theme
-   * ------------------------------------------------------------------ */
 
   function applyTheme() {
     var t = state.settings.theme;
-    if (!t) {
-      t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
+    if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     document.documentElement.dataset.theme = t;
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#14161b' : '#f6f1e7');
-    var btn = $('#theme-toggle');
-    if (btn) btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#121212' : '#fbfbf9');
   }
 
   function toggleTheme() {
-    var current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
-    state.settings.theme = current === 'dark' ? 'light' : 'dark';
+    state.settings.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     applyTheme();
     saveStore();
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Data loading & normalisation
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Data
+   * ---------------------------------------------------------------- */
 
-  function fetchJSON(file) {
-    return fetch(file, { cache: 'no-cache' }).then(function (res) {
-      if (!res.ok) throw new Error(file + ' (HTTP ' + res.status + ')');
-      return res.json();
+  function loadData() {
+    Promise.all(['vocab.json', 'kanji.json', 'structures.json'].map(function (file) {
+      return fetch(file, { cache: 'no-cache' }).then(function (res) {
+        if (!res.ok) throw new Error(file + ' (HTTP ' + res.status + ')');
+        return res.json();
+      });
+    })).then(function (results) {
+      if (!Array.isArray(results[0]) || !Array.isArray(results[1]) || !Array.isArray(results[2])) {
+        throw new Error('One of the data files is not a JSON array.');
+      }
+      normalise(results[0], results[1], results[2]);
+      state.loaded = true;
+      render();
+    }).catch(function (err) {
+      state.error = err;
+      render();
     });
   }
 
-  function loadData() {
-    Promise.all([fetchJSON('vocab.json'), fetchJSON('kanji.json'), fetchJSON('structures.json')])
-      .then(function (results) {
-        state.raw = { vocab: results[0], kanji: results[1], structures: results[2] };
-        if (!Array.isArray(results[0]) || !Array.isArray(results[1]) || !Array.isArray(results[2])) {
-          throw new Error('One of the data files is not a JSON array.');
-        }
-        normalise();
-        state.loaded = true;
-        render();
-      })
-      .catch(function (err) {
-        state.error = err;
-        render();
-      });
-  }
-
-  function normalise() {
-    state.items.vocab = state.raw.vocab.map(function (entry) {
-      var pairs = Object.keys(entry || {});
-      if (!pairs.length) return null;
-      var en = pairs[0];
+  function normalise(vocab, kanji, structures) {
+    state.items.vocab = vocab.map(function (entry) {
+      var keys = Object.keys(entry || {}).filter(function (k) { return k.charAt(0) !== '$'; });
+      if (!keys.length) return null;
+      var en = keys[0];
       var jp = entry[en];
-      if (typeof en !== 'string' || typeof jp !== 'string') return null;
-      return { deck: 'vocab', id: 'v:' + en, en: en, jp: jp };
+      if (typeof jp !== 'string') return null;
+      return {
+        deck: 'vocab', id: 'v:' + en, en: en, jp: jp,
+        type: entry.$type || null, nat: entry.$nat || null,
+        play: entry.$play || null, num: typeof entry.$num === 'number' ? entry.$num : null
+      };
     }).filter(Boolean);
 
-    state.items.kanji = state.raw.kanji.map(function (entry) {
+    state.items.kanji = kanji.map(function (entry) {
       if (!entry || !entry.kanji) return null;
       var pron = entry.pronunciations || {};
       return {
-        deck: 'kanji',
-        id: 'k:' + entry.kanji,
-        kanji: entry.kanji,
-        meanings: Array.isArray(entry.meanings) ? entry.meanings : [],
-        on: Array.isArray(pron.on_yomi) ? pron.on_yomi : [],
-        kun: Array.isArray(pron.kun_yomi) ? pron.kun_yomi : [],
+        deck: 'kanji', id: 'k:' + entry.kanji, kanji: entry.kanji,
+        meanings: entry.meanings || [],
+        on: pron.on_yomi || [], kun: pron.kun_yomi || [],
+        readings: pron.readings_in_content || [],
         entry: entry
       };
     }).filter(Boolean);
 
-    state.items.structures = state.raw.structures.map(function (entry) {
+    state.items.structures = structures.map(function (entry) {
       if (!entry || !entry.id) return null;
+      state.structuresById[entry.id] = entry;
       return { deck: 'structures', id: 's:' + entry.id, entry: entry };
     }).filter(Boolean);
 
     state.byId = new Map();
+    state.byType = {};
     ['vocab', 'kanji', 'structures'].forEach(function (deck) {
       state.items[deck].forEach(function (item) { state.byId.set(item.id, item); });
+    });
+    state.items.vocab.forEach(function (item) {
+      if (!item.type) return;
+      (state.byType[item.type] = state.byType[item.type] || []).push(item);
     });
   }
 
   function allItems(deck) {
-    if (deck === 'mixed') {
-      return state.items.vocab.concat(state.items.kanji, state.items.structures);
-    }
+    if (deck === 'mixed') return state.items.vocab.concat(state.items.kanji, state.items.structures);
     return state.items[deck] || [];
   }
 
-  function deckLabel(deck) {
-    return deck === 'mixed' ? 'Everything' : (DECK_META[deck] ? DECK_META[deck].name : 'Study');
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Progress & stats
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Progress
+   * ---------------------------------------------------------------- */
 
   function isDue(item) {
     var p = state.progress[item.id];
     if (!p) return false;
-    var interval = INTERVALS[p.b || 1];
-    if (interval == null) interval = 0;
-    return Date.now() >= (p.t || 0) + interval * DAY;
+    var gap = INTERVALS[p.b || 1];
+    return Date.now() >= (p.t || 0) + (gap == null ? 0 : gap) * DAY;
   }
 
   function recordAnswer(id, correct) {
@@ -1185,33 +601,21 @@
     var key = dateKey(new Date());
     state.activity[key] = (state.activity[key] || 0) + 1;
     saveStore();
-    updateHeader();
+    updateStreak();
   }
 
-  function deckStats(deck) {
+  function statsFor(deck) {
     var items = allItems(deck);
-    var mastered = 0, learning = 0, seen = 0, due = 0, correct = 0, wrong = 0;
+    var out = { total: items.length, mastered: 0, learning: 0, due: 0, correct: 0, wrong: 0 };
     items.forEach(function (item) {
       var p = state.progress[item.id];
-      if (p) {
-        seen++;
-        correct += p.c || 0;
-        wrong += p.w || 0;
-        if ((p.b || 1) >= 4) mastered++; else learning++;
-        if (isDue(item)) due++;
-      }
+      if (!p) return;
+      out.correct += p.c || 0;
+      out.wrong += p.w || 0;
+      if ((p.b || 1) >= 4) out.mastered++; else out.learning++;
+      if (isDue(item)) out.due++;
     });
-    return {
-      total: items.length,
-      mastered: mastered,
-      learning: learning,
-      seen: seen,
-      fresh: items.length - seen,
-      due: due,
-      correct: correct,
-      wrong: wrong,
-      pct: percent(mastered, items.length)
-    };
+    return out;
   }
 
   function streakCount() {
@@ -1219,83 +623,64 @@
     var d = new Date();
     if (!act[dateKey(d)]) d.setDate(d.getDate() - 1);
     var n = 0;
-    while (act[dateKey(d)] && n < 3650) {
-      n++;
-      d.setDate(d.getDate() - 1);
-    }
+    while (act[dateKey(d)] && n < 3650) { n++; d.setDate(d.getDate() - 1); }
     return n;
   }
 
-  function updateHeader() {
-    var pill = $('#streak-pill');
-    if (!pill) return;
+  function updateStreak() {
+    var el = $('#streak');
+    if (!el) return;
     var n = streakCount();
-    if (n > 0) {
-      pill.hidden = false;
-      pill.textContent = n === 1 ? '1-day streak' : n + '-day streak';
-    } else {
-      pill.hidden = true;
-      pill.textContent = '';
-    }
+    el.hidden = n === 0;
+    el.textContent = n ? n + ' day' + (n === 1 ? '' : 's') + ' streak' : '';
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Selection & question building
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Selection
+   * ---------------------------------------------------------------- */
 
   function previewCount(deck, scope) {
+    if (deck === 'sentences') return FRAMES.length;
     var pool = allItems(deck);
-    if (scope === 'new') {
-      return pool.filter(function (it) { return !state.progress[it.id]; }).length;
-    }
+    if (scope === 'new') return pool.filter(function (it) { return !state.progress[it.id]; }).length;
     if (scope === 'tricky') {
       return pool.filter(function (it) {
         var p = state.progress[it.id];
         return p && ((p.w || 0) > (p.c || 0) || (p.b || 1) <= 1);
       }).length;
     }
-    if (scope === 'smart') {
-      return pool.filter(function (it) { return !state.progress[it.id] || isDue(it); }).length;
-    }
+    if (scope === 'smart') return pool.filter(function (it) { return !state.progress[it.id] || isDue(it); }).length;
     return pool.length;
   }
 
   function pickItems(deck, scope, count) {
     var pool = allItems(deck);
-    var n = count === 'all' || count == null ? pool.length : Number(count);
-    n = Math.max(1, n);
-
-    if (scope === 'new') {
-      return shuffle(pool.filter(function (it) { return !state.progress[it.id]; })).slice(0, n);
-    }
-
+    var n = count === 'all' ? pool.length : Math.max(1, Number(count));
+    if (scope === 'new') return shuffle(pool.filter(function (it) { return !state.progress[it.id]; })).slice(0, n);
     if (scope === 'tricky') {
       return shuffle(pool.filter(function (it) {
         var p = state.progress[it.id];
         return p && ((p.w || 0) > (p.c || 0) || (p.b || 1) <= 1);
       })).slice(0, n);
     }
-
     if (scope === 'smart') {
       var due = shuffle(pool.filter(isDue)).slice(0, n);
       var fresh = shuffle(pool.filter(function (it) { return !state.progress[it.id]; }));
-      var result = due.concat(fresh.slice(0, Math.max(0, n - due.length)));
-      return result;
+      return due.concat(fresh.slice(0, Math.max(0, n - due.length)));
     }
-
     return shuffle(pool).slice(0, n);
   }
 
-  function buildOptions(answer, pool, max) {
+  function optionsFor(answer, poolValues, max) {
     max = max || 4;
     var out = [answer];
     var seen = {};
-    seen[String(answer).trim().toLowerCase()] = true;
-    var candidates = shuffle(pool);
+    seen[answer.trim().toLowerCase()] = true;
+    var candidates = shuffle(poolValues);
     for (var i = 0; i < candidates.length && out.length < max; i++) {
       var candidate = candidates[i];
-      if (candidate == null || candidate === '') continue;
-      var key = String(candidate).trim().toLowerCase();
+      if (!candidate) continue;
+      var key = candidate.trim().toLowerCase();
       if (seen[key]) continue;
       seen[key] = true;
       out.push(candidate);
@@ -1303,266 +688,744 @@
     return shuffle(out);
   }
 
-  function buildQuestion(item, direction) {
-    if (item.deck === 'vocab') return vocabQuestion(item, direction);
-    if (item.deck === 'kanji') return kanjiQuestion(item);
-    return structureQuestion(item);
+  /* ---------------------------------------------------------------- *
+   *  Sentence engine
+   * ---------------------------------------------------------------- */
+
+  var LANDMARKS = ['Temple', 'Castle', 'Shrine', 'Church', 'Large Buddha Statue', 'Atomic Bomb Dome', 'Library', 'Station', 'Park'];
+  var OBJECTS = ['Book', 'Television', 'Souvenir', 'Newspaper', 'Magazine', 'Novel', 'Game', 'Musical instrument'];
+  var MASS_TYPES = { sport: 1, activity: 1, food: 1, drink: 1, language: 1, colour_noun: 1, colour_adj: 1, song: 1 };
+  var PROPER = { japan: 'Japan', australia: 'Australia', america: 'America', china: 'China', england: 'England', korea: 'Korea', germany: 'Germany', vietnam: 'Vietnam', france: 'France', india: 'India', russia: 'Russia', spain: 'Spain', singapore: 'Singapore', malaysia: 'Malaysia', pakistan: 'Pakistan', 'sri lanka': 'Sri Lanka', nepal: 'Nepal', jamaica: 'Jamaica', myanmar: 'Myanmar', bangladesh: 'Bangladesh', japanese: 'Japanese', english: 'English', 'atomic bomb dome': 'Atomic Bomb Dome', 'j-pop': 'J-Pop', 'k-pop': 'K-Pop', 'hip-hop': 'Hip-Hop', chinese: 'Chinese', korean: 'Korean', german: 'German', french: 'French' };
+
+  var ADJ_BUCKETS = {
+    person: {
+      i: ['Bright / Cheerful', 'Kind / Gentle', 'Intelligent', 'Cool / Good looking', 'Interesting',
+        'Enjoyable / Fun', 'Cute', 'Beautiful', 'Good', 'Busy'],
+      na: ['Quiet', 'Famous', 'Healthy', 'Weird', 'Funny, Comedic', 'Pretty/Clean']
+    },
+    thing: {
+      i: ['Big', 'Small', 'New', 'Old', 'Beautiful', 'Interesting', 'Cute', 'Good', 'Smelly', 'Expensive'],
+      na: ['Quiet', 'Convenient', 'Pretty/Clean', 'Weird', 'Safe']
+    },
+    food: {
+      i: ['Tasty/Delicious', 'Expensive', 'Good', 'Big', 'Small', 'New'],
+      na: ['Fresh']
+    },
+    place: {
+      i: ['Big', 'Old', 'New', 'Beautiful', 'Busy', 'Good'],
+      na: ['Famous', 'Convenient', 'Bustling', 'Quiet', 'Safe', 'Pretty/Clean']
+    }
+  };
+
+  function adjPool(bucket, kind, form) {
+    var buckets = bucket === 'any' ? Object.keys(ADJ_BUCKETS) : [bucket];
+    var names = [];
+    buckets.forEach(function (b) {
+      (((ADJ_BUCKETS[b] || {})[kind]) || []).forEach(function (n) {
+        if (names.indexOf(n) === -1) names.push(n);
+      });
+    });
+    return valuesOf(byNames(names), function (it) {
+      var v = valueOf(it);
+      if (form === 'neg') return { jp: iStem(v.jp) + 'くない', en: 'is not ' + v.en };
+      if (form === 'looks') {
+        return kind === 'i'
+          ? { jp: looksStem(v.jp) + 'そう', en: 'looks ' + v.en }
+          : { jp: v.jp + 'そう', en: 'looks ' + v.en };
+      }
+      return null;
+    });
   }
 
-  function vocabQuestion(item, direction) {
-    var dir = direction === 'mixed' ? (Math.random() < 0.5 ? 'en2jp' : 'jp2en') : (direction || 'en2jp');
-    var answer = dir === 'en2jp' ? item.jp : item.en;
-    var prompt = dir === 'en2jp' ? item.en : item.jp;
-    var pool = state.items.vocab.filter(function (x) { return x.id !== item.id; })
-      .map(function (x) { return dir === 'en2jp' ? x.jp : x.en; });
-    var options = buildOptions(answer, pool);
+  var poolCache = {};
+
+  function byNames(names) {
+    return names.map(function (n) {
+      return state.items.vocab.filter(function (it) { return it.en === n; })[0];
+    }).filter(Boolean);
+  }
+
+  function valueOf(item, over) {
+    var v = {
+      jp: primaryJp(item.jp),
+      en: PROPER[primaryEn(item.en)] || primaryEn(item.en),
+      item: item,
+      type: item.type,
+      num: item.num,
+      nat: item.nat
+    };
+    if (over) Object.assign(v, over);
+    return v;
+  }
+
+  function valuesOf(items, over) {
+    return items.map(function (it) { return valueOf(it, over ? over(it) : null); });
+  }
+
+  function iStem(jp) {
+    if (jp === 'いい') return 'よ';
+    if (jp === 'かっこいい') return 'かっこよ';
+    if (jp === 'あたまがいい') return 'あたまがよ';
+    return jp.replace(/い$/, '');
+  }
+
+  function looksStem(jp) {
+    if (jp === 'いい') return 'よさ';
+    if (jp === 'かっこいい') return 'かっこよさ';
+    if (jp === 'あたまがいい') return 'あたまがよさ';
+    return iStem(jp);
+  }
+
+  function plural(en) {
+    if (/(s|x|ch|sh)$/.test(en)) return en + 'es';
+    if (/[^aeiou]y$/.test(en)) return en.slice(0, -1) + 'ies';
+    return en + 's';
+  }
+
+  var UNCOUNTABLE = /^(rice|water|milk|money|food|music|homework|tea|sushi|candy|cake|bread|tempura|sashimi|curry|tofu|meat|udon|soba|ramen)$/;
+
+  function isPluralEn(en) {
+    return /s$/.test(en) && !UNCOUNTABLE.test(en) && !/(ss|us|is)$/.test(en);
+  }
+
+  function beVerb(v) { return isPluralEn(v.en) ? 'are' : 'is'; }
+
+  function listPhrase(v) {
+    if (v.type === 'song' && v.en === 'song') return 'songs';
+    var countable = v.type === 'animal' || v.type === 'thing' || v.type === 'instrument' ||
+      v.type === 'person' || v.type === 'family' || v.type === 'colour_noun';
+    return countable ? plural(v.en) : v.en;
+  }
+
+  function thePhrase(v) {
+    if (MASS_TYPES[v.type] || v.type === 'country' || v.type === 'locality') return v.en;
+    return 'the ' + v.en;
+  }
+
+  function aPhrase(v) {
+    if (MASS_TYPES[v.type]) return v.en;
+    return (/^[aeiou]/i.test(v.en) ? 'an ' : 'a ') + v.en;
+  }
+
+  function placePhrase(v) {
+    if (v.type === 'country') return v.en.charAt(0).toUpperCase() + v.en.slice(1);
+    return 'the ' + v.en;
+  }
+
+  function doVerb(v) { return v.type === 'sport' ? 'play' : 'do'; }
+
+  function comparative(en) {
+    var map = {
+      tasty: 'tastier', delicious: 'tastier', cute: 'cuter', big: 'bigger', small: 'smaller',
+      new: 'newer', old: 'older', good: 'better', busy: 'busier', interesting: 'more interesting',
+      beautiful: 'more beautiful', kind: 'kinder', cool: 'cooler', bright: 'brighter',
+      expensive: 'more expensive', fun: 'more fun', smelly: 'smellier'
+    };
+    return map[en] || 'more ' + en;
+  }
+
+  function capitalise(text) { return text.charAt(0).toUpperCase() + text.slice(1); }
+
+  function pool(name) {
+    if (poolCache[name]) return poolCache[name];
+    var adjMatch = /^adj:(\w+):(\w+):(\w+)$/.exec(name);
+    if (adjMatch) {
+      poolCache[name] = adjPool(adjMatch[1], adjMatch[2], adjMatch[3]);
+      return poolCache[name];
+    }
+    var types = function (list) {
+      var out = [];
+      list.forEach(function (t) { out = out.concat(state.byType[t] || []); });
+      return out;
+    };
+    var builders = {
+      person: function () {
+        return valuesOf(types(['person']).filter(function (it) {
+          return it.en !== 'I' && it.en !== 'I, me, myself (male)';
+        }));
+      },
+      family: function () { return valuesOf(types(['family'])); },
+      animal: function () { return valuesOf(types(['animal'])); },
+      thing: function () {
+        return valuesOf(types(['thing', 'animal', 'food', 'drink', 'sport', 'activity', 'place',
+          'instrument', 'song', 'event', 'person', 'family']));
+      },
+      likable: function () {
+        return valuesOf(types(['animal', 'thing', 'food', 'drink', 'sport', 'activity', 'song',
+          'instrument', 'place', 'event', 'person']));
+      },
+      physical: function () {
+        return valuesOf(types(['thing', 'animal', 'food', 'instrument']));
+      },
+      reside: function () { return valuesOf(types(['locality', 'country'])); },
+      object: function () { return valuesOf(byNames(OBJECTS)); },
+      place: function () { return valuesOf(types(['place', 'locality'])); },
+      place_live: function () { return valuesOf(types(['place', 'locality', 'country'])); },
+      landmark: function () { return valuesOf(byNames(LANDMARKS)); },
+      activity: function () { return valuesOf(types(['activity', 'sport'])); },
+      food: function () { return valuesOf(types(['food'])); },
+      drink: function () { return valuesOf(types(['drink'])); },
+      instrument: function () { return valuesOf(types(['instrument'])); },
+      song: function () { return valuesOf(types(['song'])); },
+      item: function () { return valuesOf(types(['food', 'drink'])); },
+      category: function () {
+        return valuesOf(types(['animal', 'food', 'drink', 'sport', 'activity', 'place', 'song', 'instrument']));
+      },
+      adj_i_food: function () {
+        return valuesOf(byNames(['Tasty/Delicious', 'Expensive', 'Good', 'Big', 'Small']));
+      },
+      subject_person: function () { return valuesOf(types(['person', 'family'])); },
+      subject_thing: function () {
+        return valuesOf(types(['animal', 'thing', 'instrument']).filter(function (it) { return !/comics/i.test(it.en); }));
+      },
+      subject_food: function () { return valuesOf(types(['food'])); },
+      subject_place: function () { return valuesOf(types(['place', 'locality'])); },
+      colour_target: function () { return valuesOf(types(['animal', 'thing', 'instrument'])); },
+      preference: function () { return valuesOf(byNames(['Like', 'Dislike', 'Hate', 'Love (not romantically)'])); },
+      country: function () { return valuesOf(types(['country'])); },
+      day: function () { return valuesOf(types(['day'])); },
+      day_rel: function () { return valuesOf(types(['day_relative'])); },
+      age: function () {
+        return valuesOf(types(['age']).filter(function (it) { return it.num && it.num < 30; }));
+      },
+      people: function () { return valuesOf(types(['counter_people'])); },
+      number_small: function () {
+        return valuesOf(types(['number']).filter(function (it) { return it.num >= 10 && it.num <= 1000; }));
+      },
+      year: function () {
+        return valuesOf(types(['number']).filter(function (it) { return it.num >= 800 && it.num <= 2000; }));
+      },
+      colour: function () {
+        return valuesOf(types(['colour_noun']), function (it) {
+          var v = valueOf(it);
+          return { jp: v.jp + 'の', en: v.en };
+        }).concat(valuesOf(types(['colour_adj']), function (it) {
+          var v = valueOf(it);
+          return { jp: v.jp, en: v.en.replace(/ \(adjective\)$/, '') };
+        }));
+      }
+    };
+    poolCache[name] = builders[name] ? builders[name]() : [];
+    return poolCache[name];
+  }
+
+  var META = {
+    adjs: { name: 'Adjectives', types: ['sentence_pattern', 'grammar_formation'], cats: ['Identity and description', 'Adjective formations'] },
+    verbs: { name: 'Activities', types: ['sentence_pattern', 'question_pattern'], cats: ['Activities and everyday verbs', 'Likes and dislikes'] },
+    places: { name: 'Places', types: ['sentence_pattern', 'question_pattern'], cats: ['Existence, location and places'] },
+    food: { name: 'Food', types: ['sentence_pattern', 'question_pattern'], cats: ['Food, ordering and prices'] },
+    family: { name: 'Family', types: ['sentence_pattern', 'question_pattern'], cats: ['Family and counting people'] },
+    questions: { name: 'Questions', types: ['question_pattern'], cats: [] }
+  };
+
+  function frameEn(name) {
+    var s = state.structuresById[name];
+    return s ? s.name : name.replace(/_/g, ' ');
+  }
+
+  function SUBJECT_VARIANTS(kind, form) {
+    return ['person', 'thing', 'food', 'place'].map(function (bucket) {
+      return { n: 'subject_' + bucket, a: 'adj:' + bucket + ':' + kind + ':' + form };
+    });
+  }
+
+  function NOUN_VARIANTS(kind) {
+    return ['thing', 'food'].map(function (bucket) {
+      return { n: 'subject_' + bucket, a: 'adj:' + bucket + ':' + kind + ':base' };
+    });
+  }
+
+  var FRAMES = [
+    {
+      id: 'i_adj', group: 'adjs', src: 'describe_with_i_adjective',
+      jp: '[n]は [a]です。', variants: SUBJECT_VARIANTS('i', 'base'), blank: 'a',
+      en: function (v) { return capitalise(thePhrase(v.n)) + ' is ' + v.a.en + '.'; }
+    },
+    {
+      id: 'na_adj', group: 'adjs', src: 'describe_with_na_adjective',
+      jp: '[n]は [a]です。', variants: SUBJECT_VARIANTS('na', 'base'), blank: 'a',
+      en: function (v) { return capitalise(thePhrase(v.n)) + ' is ' + v.a.en + '.'; }
+    },
+    {
+      id: 'i_adj_neg', group: 'adjs', src: 'i_adjective_negative',
+      jp: '[n]は [a]です。', variants: SUBJECT_VARIANTS('i', 'neg'), blank: 'a',
+      en: function (v) { return capitalise(thePhrase(v.n)) + ' ' + v.a.en + '.'; }
+    },
+    {
+      id: 'i_adj_looks', group: 'adjs', src: 'looks_i_adjective',
+      jp: '[n]は [a]です。', variants: SUBJECT_VARIANTS('i', 'looks'), blank: 'a',
+      en: function (v) { return capitalise(thePhrase(v.n)) + ' ' + v.a.en + '.'; }
+    },
+    {
+      id: 'na_adj_looks', group: 'adjs', src: 'looks_na_adjective',
+      jp: '[n]は [a]です。', variants: SUBJECT_VARIANTS('na', 'looks'), blank: 'a',
+      en: function (v) { return capitalise(thePhrase(v.n)) + ' ' + v.a.en + '.'; }
+    },
+    {
+      id: 'i_adj_noun', group: 'adjs', src: 'i_adjective_before_noun',
+      jp: 'これは [a] [n]です。', variants: NOUN_VARIANTS('i'), blank: 'a',
+      en: function (v) { return 'This is ' + aPhrase({ en: v.a.en, type: 'adj' }) + ' ' + v.n.en + '.'; }
+    },
+    {
+      id: 'na_adj_noun', group: 'adjs', src: 'na_adjective_before_noun',
+      jp: 'これは [a]な [n]です。', variants: NOUN_VARIANTS('na'), blank: 'a',
+      en: function (v) { return 'This is ' + aPhrase({ en: v.a.en, type: 'adj' }) + ' ' + v.n.en + '.'; }
+    },
+    {
+      id: 'colour_noun', group: 'adjs', src: 'colour_before_noun',
+      jp: '[c][n]が すきです。', slots: { n: 'colour_target', c: 'colour' }, blank: 'c',
+      en: function (v) { return 'I like the ' + v.c.en + ' ' + v.n.en + '.'; }
+    },
+    {
+      id: 'comparative', group: 'adjs', src: 'comparative_yori',
+      jp: '[a]は [b]より [c]です。', slots: { a: 'item', b: 'item', c: 'adj_i_food' }, blank: 'c',
+      en: function (v) {
+        return capitalise(thePhrase(v.a)) + ' ' + beVerb(v.a) + ' ' + comparative(v.c.en) + ' than ' + thePhrase(v.b) + '.';
+      }
+    },
+    {
+      id: 'preference', group: 'verbs', src: 'preference_statement',
+      jp: '[n]が [p]です。', slots: { n: 'likable', p: 'preference' }, blank: 'n',
+      en: function (v) { return 'I ' + v.p.en + ' ' + listPhrase(v.n) + '.'; }
+    },
+    {
+      id: 'preference_q', group: 'verbs', src: 'preference_yes_no_question',
+      jp: '[n]が すきですか。', slots: { n: 'likable' }, blank: 'n',
+      en: function (v) { return 'Do you like ' + listPhrase(v.n) + '?'; }
+    },
+    {
+      id: 'what_kind', group: 'verbs', src: 'what_kind_do_you_like',
+      jp: 'どんな [n]が すきですか。', slots: { n: 'category' }, blank: 'n',
+      en: function (v) { return 'What kind of ' + listPhrase(v.n) + ' do you like?'; }
+    },
+    {
+      id: 'activity', group: 'verbs', src: 'activity_shimasu_statement',
+      jp: '[x]を します。', slots: { x: 'activity' }, blank: 'x',
+      en: function (v) { return 'I ' + doVerb(v.x) + ' ' + v.x.en + '.'; }
+    },
+    {
+      id: 'activity_neg', group: 'verbs', src: 'activity_shimasu_negative',
+      jp: '[x]を しません。', slots: { x: 'activity' }, blank: 'x',
+      en: function (v) { return 'I do not ' + doVerb(v.x) + ' ' + v.x.en + '.'; }
+    },
+    {
+      id: 'activity_q', group: 'verbs', src: 'activity_shimasu_question',
+      jp: '[x]を しますか。', slots: { x: 'activity' }, blank: 'x',
+      en: function (v) { return 'Do you ' + doVerb(v.x) + ' ' + v.x.en + '?'; }
+    },
+    {
+      id: 'eat', group: 'food', src: 'eat_something',
+      jp: '[f]を たべます。', slots: { f: 'food' }, blank: 'f',
+      en: function (v) { return 'I eat ' + v.f.en + '.'; }
+    },
+    {
+      id: 'drink', group: 'food', src: 'drink_something',
+      jp: '[d]を のみます。', slots: { d: 'drink' }, blank: 'd',
+      en: function (v) { return 'I drink ' + v.d.en + '.'; }
+    },
+    {
+      id: 'instrument', group: 'verbs', src: 'play_an_instrument',
+      jp: '[i]を [pv]。', slots: { i: 'instrument' }, blank: 'i',
+      en: function (v) { return 'I play the ' + v.i.en + '.'; }
+    },
+    {
+      id: 'sing', group: 'verbs', src: 'sing_something',
+      jp: '[s]を うたいます。', slots: { s: 'song' }, blank: 's',
+      en: function (v) { return 'I sing ' + (v.s.en === 'song' ? 'a song' : v.s.en) + '.'; }
+    },
+    {
+      id: 'go_to', group: 'places', src: 'go_to_place_or_activity',
+      jp: '[p]に いきます。', slots: { p: 'place' }, blank: 'p',
+      en: function (v) { return 'I go to ' + placePhrase(v.p) + '.'; }
+    },
+    {
+      id: 'live_in', group: 'places', src: 'live_in_a_place',
+      jp: '[p]に すんでいます。', slots: { p: 'reside' }, blank: 'p',
+      en: function (v) { return 'I live in ' + placePhrase(v.p) + '.'; }
+    },
+    {
+      id: 'there_thing', group: 'places', src: 'inanimate_at_place_statement',
+      jp: '[p]に [o]が あります。', slots: { p: 'place', o: 'object' }, blank: 'o',
+      en: function (v) { return 'There is ' + aPhrase(v.o) + ' at ' + placePhrase(v.p) + '.'; }
+    },
+    {
+      id: 'there_animal', group: 'places', src: 'animate_at_place_statement',
+      jp: '[p]に [a]が います。', slots: { p: 'place', a: 'animal' }, blank: 'a',
+      en: function (v) { return 'There is ' + aPhrase(v.a) + ' at ' + placePhrase(v.p) + '.'; }
+    },
+    {
+      id: 'famous_for', group: 'places', src: 'famous_for_statement',
+      jp: '[p]は [l]で ゆうめいです。', slots: { p: 'reside', l: 'landmark' }, blank: 'l',
+      en: function (v) { return capitalise(placePhrase(v.p)) + ' is famous for ' + thePhrase(v.l) + '.'; }
+    },
+    {
+      id: 'built', group: 'places', src: 'built_in_year',
+      jp: '[p]は [y]ねん に できました。', slots: { p: 'landmark', y: 'year' }, blank: 'y',
+      en: function (v) { return capitalise(thePhrase(v.p)) + ' was built in ' + v.y.num + '.'; }
+    },
+    {
+      id: 'price_q', group: 'food', src: 'price_question',
+      jp: '[i]は いくらですか。', slots: { i: 'item' }, blank: 'i',
+      en: function (v) { return 'How much is ' + thePhrase(v.i) + '?'; }
+    },
+    {
+      id: 'price', group: 'food', src: 'price_statement',
+      jp: '[i]は [n]えん です。', slots: { i: 'item', n: 'number_small' }, blank: 'n',
+      en: function (v) { return capitalise(thePhrase(v.i)) + ' ' + beVerb(v.i) + ' ' + v.n.num + ' yen.'; }
+    },
+    {
+      id: 'order', group: 'food', src: 'choose_an_item',
+      jp: '[i]に します。', slots: { i: 'item' }, blank: 'i',
+      en: function (v) { return "I'll have " + thePhrase(v.i) + '.'; }
+    },
+    {
+      id: 'request', group: 'food', src: 'request_item_kudasai',
+      jp: '[i]を ください。', slots: { i: 'item' }, blank: 'i',
+      en: function (v) { return capitalise(thePhrase(v.i)) + ', please.'; }
+    },
+    {
+      id: 'request2', group: 'food', src: 'request_item_onegaishimasu',
+      jp: '[i]おねがいします。', slots: { i: 'item' }, blank: 'i',
+      en: function (v) { return 'May I have ' + thePhrase(v.i) + ', please?'; }
+    },
+    {
+      id: 'nationality', group: 'family', src: 'nationality_statement',
+      jp: '[c]じん です。', slots: { c: 'country' }, blank: 'c',
+      en: function (v) { return 'I am ' + (v.c.nat || v.c.en) + '.'; }
+    },
+    {
+      id: 'age', group: 'family', src: 'age_statement',
+      jp: 'わたしは [a]です。', slots: { a: 'age' }, blank: 'a',
+      en: function (v) { return 'I am ' + v.a.num + ' years old.'; }
+    },
+    {
+      id: 'family_size', group: 'family', src: 'family_size_answer',
+      jp: 'かぞくは [n]です。', slots: { n: 'people' }, blank: 'n',
+      en: function (v) {
+        return v.n.num === 1 ? 'There is 1 person in my family.' : 'There are ' + v.n.num + ' people in my family.';
+      }
+    },
+    {
+      id: 'day_q', group: 'family', src: 'day_of_week_question_present',
+      jp: '[d]は なんようびですか。', slots: { d: 'day_rel' }, blank: 'd',
+      en: function (v) { return 'What day of the week is it ' + v.d.en + '?'; }
+    },
+    {
+      id: 'day_plan_q', group: 'questions', src: 'what_do_on_a_day',
+      jp: '[d]に なにを しますか。', slots: { d: 'day' }, blank: 'd',
+      en: function (v) { return 'What do you do on ' + capitalise(v.d.en) + '?'; }
+    },
+    {
+      id: 'day_activity_q', group: 'questions', src: 'what_day_do_activity',
+      jp: 'なんようびに [x]を しますか。', slots: { x: 'activity' }, blank: 'x',
+      en: function (v) { return 'On what day do you ' + doVerb(v.x) + ' ' + v.x.en + '?'; }
+    }
+  ];
+
+  function fillFrame(template, values, blankSlot) {
+    return template.replace(/\[([a-z]+)\]/g, function (token, name) {
+      if (name === blankSlot) return '<span class="fill">＿＿</span>';
+      var v = values[name];
+      return v ? esc(v.jp) : token;
+    });
+  }
+
+  var FALLBACK_POOLS = { day_rel: 'day', age: 'people', people: 'age', adj_i_food: 'adj:any:i:base' };
+
+  function fallbackPool(poolName) {
+    if (FALLBACK_POOLS[poolName]) return FALLBACK_POOLS[poolName];
+    var adj = /^adj:(\w+):(\w+):(\w+)$/.exec(poolName);
+    if (adj) return 'adj:any:' + adj[2] + ':' + adj[3];
+    return null;
+  }
+
+  function framePool(group) {
+    return FRAMES.filter(function (f) { return group === 'all' || f.group === group; });
+  }
+
+  function buildSentenceCard(used) {
+    var frames = framePool(state.setup.group);
+    var available = frames.filter(function (f) { return !used[f.id]; });
+    if (!available.length) { available = frames; used = {}; }
+    var frame = pick(available);
+    used[frame.id] = true;
+
+    var slots = frame.variants ? pick(frame.variants) : frame.slots;
+    var values = {};
+    var ok = true;
+    Object.keys(slots).forEach(function (slotName) {
+      var poolName = slots[slotName];
+      var list = pool(poolName);
+      if (!list.length) { ok = false; return; }
+      values[slotName] = pick(list);
+    });
+    if (!ok) return null;
+
+    if (frame.id === 'instrument') {
+      values.pv = { jp: values.i.item.play || 'ひきます', en: '' };
+    }
+    if (frame.id === 'comparative' && values.a.item === values.b.item) {
+      var other = pick(pool('item').filter(function (v) { return v.item !== values.a.item; }));
+      if (other) values.b = other;
+    }
+
+    var target = values[frame.blank];
+    var poolName = slots[frame.blank];
+    var distractorPool = pool(poolName).map(function (v) { return v.jp; });
+    var fallback = distractorPool.length < 5 ? fallbackPool(poolName) : null;
+    if (fallback) {
+      distractorPool = distractorPool.concat(pool(fallback).map(function (v) { return v.jp; }));
+    }
+    var distractors = optionsFor(target.jp, distractorPool);
+    var jp = fillFrame(frame.jp, values, null);
+    var prompt = fillFrame(frame.jp, values, frame.blank);
+    var english = frame.en(values);
+
     return {
-      itemId: item.id,
-      deck: 'vocab',
-      label: dir === 'en2jp' ? 'English → 日本語' : '日本語 → English',
+      kind: 'sentence',
+      itemId: target.item ? target.item.id : null,
+      label: 'Sentence · ' + META[frame.group].name,
       prompt: prompt,
-      promptJa: hasJa(prompt),
+      promptJa: true,
+      promptClass: 'sentence',
+      options: distractors,
+      correctIndex: Math.max(0, distractors.indexOf(target.jp)),
+      answer: jp,
+      speech: jp.replace(/。/g, '。'),
+      detailHtml: '<span class="jp">' + esc(jp) + '</span><br>' + esc(english) +
+        '<br><small>' + esc(frameEn(frame.src)) + '</small>',
+      englishHtml: esc(english) + '<br><small>' + esc(frameEn(frame.src)) + '</small>'
+    };
+  }
+
+  /* ---------------------------------------------------------------- *
+   *  Cards for the other decks
+   * ---------------------------------------------------------------- */
+
+  function vocabCard(item, direction) {
+    var dir = direction === 'mixed' ? (Math.random() < 0.5 ? 'en2jp' : 'jp2en') : direction;
+    var front = dir === 'en2jp' ? item.en : item.jp;
+    var back = dir === 'en2jp' ? item.jp : item.en;
+    var answer = dir === 'en2jp' ? item.jp : item.en;
+    var optionPool = state.items.vocab.filter(function (x) { return x.id !== item.id; })
+      .map(function (x) { return dir === 'en2jp' ? x.jp : x.en; });
+    var options = optionsFor(answer, optionPool);
+    return {
+      kind: 'vocab',
+      itemId: item.id,
+      label: dir === 'en2jp' ? 'English → 日本語' : '日本語 → English',
+      prompt: front,
+      promptJa: hasJa(front),
       promptClass: '',
-      optionKanji: false,
       options: options,
       correctIndex: Math.max(0, options.indexOf(answer)),
-      explainHtml: '<span class="jp">' + esc(item.jp) + '</span> <span class="muted">— ' + esc(item.en) + '</span>',
-      speech: item.jp
+      answer: back,
+      speech: item.jp,
+      detailHtml: '<span class="jp">' + esc(item.jp) + '</span> — ' + esc(item.en)
     };
   }
 
-  function kanjiQuestion(item) {
-    var meaningStr = item.meanings.join(' / ');
+  function kanjiCard(item) {
+    var meaning = item.meanings.join(' / ');
     var roll = Math.random();
+    var detail = '<span class="jp" style="font-family:var(--serif)">' + esc(item.kanji) + '</span> — ' + esc(meaning) +
+      '<br>On: ' + esc(item.on.join('・') || '—') + ' · Kun: ' + esc(item.kun.join('・') || '—');
 
-    if (roll < 0.45 || !item.on.length) {
-      var poolMeanings = state.items.kanji.filter(function (x) { return x.id !== item.id; })
+    if (roll < 0.5 || !item.on.length) {
+      var meaningPool = state.items.kanji.filter(function (x) { return x.id !== item.id; })
         .map(function (x) { return x.meanings.join(' / '); });
-      var meanOptions = buildOptions(meaningStr, poolMeanings);
+      var meanings = optionsFor(meaning, meaningPool);
       return {
-        itemId: item.id, deck: 'kanji', label: 'Kanji · meaning',
-        prompt: item.kanji, promptJa: true, promptClass: 'glyph', optionKanji: false,
-        options: meanOptions,
-        correctIndex: Math.max(0, meanOptions.indexOf(meaningStr)),
-        explainHtml: '<span class="jp serif" style="font-size:19px">' + esc(item.kanji) + '</span> <span class="muted">— ' + esc(meaningStr) + '</span><br><span class="muted">On: ' + esc(item.on.join('・') || '—') + ' · Kun: ' + esc(item.kun.join('・') || '—') + '</span>',
-        speech: item.kanji
+        kind: 'kanji', itemId: item.id, label: 'Kanji · meaning',
+        prompt: item.kanji, promptJa: true, promptClass: 'glyph',
+        options: meanings, correctIndex: Math.max(0, meanings.indexOf(meaning)),
+        answer: meaning, speech: item.kanji, detailHtml: detail
       };
     }
-
-    if (roll < 0.74) {
-      var poolKanji = state.items.kanji.filter(function (x) { return x.id !== item.id; })
+    if (roll < 0.78) {
+      var kanjiPool = state.items.kanji.filter(function (x) { return x.id !== item.id; })
         .map(function (x) { return x.kanji; });
-      var kanjiOptions = buildOptions(item.kanji, poolKanji);
+      var kanjiOptions = optionsFor(item.kanji, kanjiPool);
       return {
-        itemId: item.id, deck: 'kanji', label: 'Meaning · kanji',
-        prompt: meaningStr, promptJa: false, promptClass: 'medium', optionKanji: true,
-        options: kanjiOptions,
-        correctIndex: Math.max(0, kanjiOptions.indexOf(item.kanji)),
-        explainHtml: '<span class="jp serif" style="font-size:19px">' + esc(item.kanji) + '</span> <span class="muted">— ' + esc(meaningStr) + '</span><br><span class="muted">On: ' + esc(item.on.join('・') || '—') + ' · Kun: ' + esc(item.kun.join('・') || '—') + '</span>',
-        speech: item.kanji
+        kind: 'kanji', itemId: item.id, label: 'Meaning · kanji',
+        prompt: meaning, promptJa: false, promptClass: 'small',
+        options: kanjiOptions, correctIndex: Math.max(0, kanjiOptions.indexOf(item.kanji)),
+        answer: item.kanji, speech: item.kanji, detailHtml: detail
       };
     }
-
-    var answer = item.on[0];
-    var poolReadings = state.items.kanji.filter(function (x) { return x.id !== item.id && x.on.length; })
+    var reading = item.on[0];
+    var readingPool = state.items.kanji.filter(function (x) { return x.id !== item.id && x.on.length; })
       .map(function (x) { return x.on[0]; });
-    var readingOptions = buildOptions(answer, poolReadings);
+    var readings = optionsFor(reading, readingPool);
     return {
-      itemId: item.id, deck: 'kanji', label: 'Kanji · on-yomi',
-      prompt: item.kanji, promptJa: true, promptClass: 'glyph', optionKanji: false,
-      options: readingOptions,
-      correctIndex: Math.max(0, readingOptions.indexOf(answer)),
-      explainHtml: '<span class="jp serif" style="font-size:19px">' + esc(item.kanji) + '</span> <span class="muted">— ' + esc(meaningStr) + '</span><br><span class="muted">On: ' + esc(item.on.join('・') || '—') + ' · Kun: ' + esc(item.kun.join('・') || '—') + '</span>',
-      speech: item.kanji
+      kind: 'kanji', itemId: item.id, label: 'Kanji · on-yomi',
+      prompt: item.kanji, promptJa: true, promptClass: 'glyph',
+      options: readings, correctIndex: Math.max(0, readings.indexOf(reading)),
+      answer: reading, speech: item.kanji, detailHtml: detail
     };
   }
 
-  function structureQuestion(item) {
+  function structureCard(item) {
     var s = item.entry;
-    var pattern = s.pattern || '';
-    var english = s.english_template || s.name || '';
-    var sharedEnglish = state.items.structures.filter(function (x) {
+    var patternFirst = Math.random() < 0.5;
+    var english = s.english_template || s.name;
+    var example = s.example && s.example.japanese
+      ? '<span class="jp">' + esc(s.example.japanese) + '</span> — ' + esc(s.example.english)
+      : '';
+    var detail = '<span class="jp">' + esc(s.pattern) + '</span><br>' + esc(english) +
+      (example ? '<br>' + example : '') + '<br><small>' + esc(s.formation) + '</small>';
+
+    var shared = state.items.structures.filter(function (x) {
       return (x.entry.english_template || x.entry.name) === english;
     }).length > 1;
-    var patternFirst = sharedEnglish ? true : Math.random() < 0.5;
-    var example = s.example;
-    var explain = '<strong>' + esc(s.name) + '</strong><br><span class="muted">' + esc(s.formation || '') + '</span>';
-    if (example && example.japanese) {
-      explain += '<div class="jp" style="margin-top:6px;font-size:15px">' + esc(example.japanese) +
-        ' <span class="muted" style="font-size:12.5px">— ' + esc(example.english) + '</span></div>';
-    }
 
-    if (patternFirst) {
-      var poolEnglish = state.items.structures.filter(function (x) { return x.id !== item.id; })
+    if (patternFirst || shared) {
+      var englishPool = state.items.structures.filter(function (x) { return x.id !== item.id; })
         .map(function (x) { return x.entry.english_template || x.entry.name; });
-      var englishOptions = buildOptions(english, poolEnglish);
+      var englishOptions = optionsFor(english, englishPool);
       return {
-        itemId: item.id, deck: 'structures', label: 'Pattern · meaning',
-        prompt: pattern, promptJa: hasJa(pattern), promptClass: 'medium', optionKanji: false,
-        options: englishOptions,
-        correctIndex: Math.max(0, englishOptions.indexOf(english)),
-        explainHtml: explain,
-        speech: null
+        kind: 'structure', itemId: item.id, label: 'Pattern · meaning',
+        prompt: s.pattern, promptJa: hasJa(s.pattern), promptClass: 'small',
+        options: englishOptions, correctIndex: Math.max(0, englishOptions.indexOf(english)),
+        answer: english, speech: s.example && s.example.japanese, detailHtml: detail
       };
     }
-
-    var poolPatterns = state.items.structures.filter(function (x) { return x.id !== item.id; })
+    var patternPool = state.items.structures.filter(function (x) { return x.id !== item.id; })
       .map(function (x) { return x.entry.pattern; });
-    var patternOptions = buildOptions(pattern, poolPatterns);
+    var patternOptions = optionsFor(s.pattern, patternPool);
     return {
-      itemId: item.id, deck: 'structures', label: 'Meaning · pattern',
-      prompt: english, promptJa: false, promptClass: 'medium', optionKanji: false,
-      options: patternOptions,
-      correctIndex: Math.max(0, patternOptions.indexOf(pattern)),
-      explainHtml: explain,
-      speech: null
+      kind: 'structure', itemId: item.id, label: 'Meaning · pattern',
+      prompt: english, promptJa: false, promptClass: 'small',
+      options: patternOptions, correctIndex: Math.max(0, patternOptions.indexOf(s.pattern)),
+      answer: s.pattern, speech: s.example && s.example.japanese, detailHtml: detail
     };
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Session lifecycle
-   * ------------------------------------------------------------------ */
+  function buildCards(deck, items) {
+    var used = {};
+    var cards = [];
+    if (deck === 'sentences') {
+      var guard = 0;
+      while (cards.length < items.length && guard < items.length * 6) {
+        var card = buildSentenceCard(used);
+        if (card) cards.push(card);
+        guard++;
+      }
+      return cards;
+    }
+    items.forEach(function (item) {
+      if (item.deck === 'vocab') cards.push(vocabCard(item, state.setup.direction));
+      else if (item.deck === 'kanji') cards.push(kanjiCard(item));
+      else cards.push(structureCard(item));
+    });
+    return cards;
+  }
+
+  /* ---------------------------------------------------------------- *
+   *  Sessions
+   * ---------------------------------------------------------------- */
 
   function startSession(opts) {
     opts = opts || {};
+    var deck = opts.deck || state.setup.deck;
     var mode = opts.mode || 'quiz';
-    var deck = opts.deck || 'vocab';
-    var direction = opts.direction || state.setup.direction;
-    var items = opts.items ? opts.items.slice() : pickItems(deck, opts.scope || 'smart', opts.count);
+    var scope = opts.scope || state.setup.scope;
+    var count = opts.count != null ? opts.count : state.setup.count;
 
+    var items = opts.items ? opts.items.slice() : (deck === 'sentences' ? [] : pickItems(deck, scope, count));
+    var total = deck === 'sentences' ? (count === 'all' ? 12 : Number(count)) : items.length;
+    if (deck === 'sentences') items = new Array(total).fill(null);
     if (!items.length) {
-      toast('Nothing in that queue yet — try “All cards”.');
+      toast('Nothing queued for that option — try “All”.');
       return;
     }
 
-    if (mode === 'flash' && direction === 'mixed') {
-      direction = Math.random() < 0.5 ? 'en2jp' : 'jp2en';
+    var cards = buildCards(deck, items);
+    if (!cards.length) {
+      toast('Could not build sentences from this data.');
+      return;
     }
 
-    var label = opts.label || (deckLabel(deck) + (mode === 'quiz' ? ' quiz' : ' flashcards'));
+    state.session = {
+      mode: mode,
+      deck: deck,
+      label: opts.label || DECK_NAMES[deck] + (deck === 'sentences' ? ' practice' : ''),
+      cards: cards,
+      idx: 0,
+      answered: null,
+      flipped: false,
+      results: [],
+      correct: 0,
+      finished: false,
+      config: { deck: deck, mode: mode, count: count, scope: scope, label: opts.label || null }
+    };
 
-    if (mode === 'quiz') {
-      state.session = {
-        mode: 'quiz',
-        label: label,
-        items: items,
-        questions: items.map(function (it) { return buildQuestion(it, direction); }),
-        idx: 0,
-        answered: null,
-        correctCount: 0,
-        results: [],
-        finished: false,
-        config: { mode: 'quiz', deck: deck, direction: direction, items: items.slice(), label: label }
-      };
-    } else {
-      state.session = {
-        mode: 'flash',
-        label: label,
-        items: items,
-        index: 0,
-        flipped: false,
-        correctCount: 0,
-        results: [],
-        finished: false,
-        config: { mode: 'flash', deck: deck, direction: direction, items: items.slice(), label: label }
-      };
-    }
-
-    if (currentRoute() !== 'study') {
-      location.hash = '#study';
-    } else {
-      render();
-    }
-    scrollSessionTop();
+    if (currentRoute() !== 'study') location.hash = '#study';
+    else render();
+    if (window.scrollY > 60) window.scrollTo({ top: 0 });
   }
 
-  function scrollSessionTop() {
-    if (window.scrollY > 80) window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function answerQuestion(index) {
+  function answerQuiz(index) {
     var s = state.session;
     if (!s || s.mode !== 'quiz' || s.finished || s.answered !== null) return;
-    var q = s.questions[s.idx];
-    if (index < 0 || index >= q.options.length) return;
-    var ok = index === q.correctIndex;
+    var card = s.cards[s.idx];
+    if (index < 0 || index >= card.options.length) return;
+    var ok = index === card.correctIndex;
     s.answered = index;
-    if (ok) s.correctCount++;
-    s.results.push({ itemId: q.itemId, correct: ok, item: state.byId.get(q.itemId) });
-    recordAnswer(q.itemId, ok);
+    if (ok) s.correct++;
+    s.results.push({ card: card, correct: ok });
+    if (card.itemId) recordAnswer(card.itemId, ok);
     render();
   }
 
-  function nextQuestion() {
+  function nextCard() {
     var s = state.session;
     if (!s || s.mode !== 'quiz' || s.answered === null) return;
-    if (s.idx >= s.questions.length - 1) {
-      s.finished = true;
-    } else {
-      s.idx++;
-      s.answered = null;
-    }
+    if (s.idx >= s.cards.length - 1) s.finished = true;
+    else { s.idx++; s.answered = null; }
     render();
-    scrollSessionTop();
+    if (window.scrollY > 60) window.scrollTo({ top: 0 });
   }
 
-  function toggleFlash() {
+  function flip() {
     var s = state.session;
     if (!s || s.mode !== 'flash' || s.finished) return;
     s.flipped = !s.flipped;
-    var card = $('.flashcard');
-    if (card) {
-      card.classList.toggle('flipped', s.flipped);
-      card.setAttribute('aria-pressed', String(s.flipped));
-    }
-    $all('[data-action="grade"]').forEach(function (btn) { btn.disabled = !s.flipped; });
+    render();
   }
 
-  function gradeFlash(grade) {
+  function gradeFlash(ok) {
     var s = state.session;
     if (!s || s.mode !== 'flash' || s.finished || !s.flipped) return;
-    var item = s.items[s.index];
-    if (!item) return;
-    var ok = grade === 1;
-    recordAnswer(item.id, ok);
-    s.results.push({ itemId: item.id, correct: ok, item: item });
-    if (ok) s.correctCount++;
-    if (s.index >= s.items.length - 1) {
-      s.finished = true;
-    } else {
-      s.index++;
-      s.flipped = false;
-    }
+    var card = s.cards[s.idx];
+    if (!card) return;
+    if (card.itemId) recordAnswer(card.itemId, ok);
+    if (ok) s.correct++;
+    s.results.push({ card: card, correct: ok });
+    if (s.idx >= s.cards.length - 1) s.finished = true;
+    else { s.idx++; s.flipped = false; }
     render();
-    scrollSessionTop();
+    if (window.scrollY > 60) window.scrollTo({ top: 0 });
   }
 
   function restartSession() {
     var s = state.session;
     if (!s) return;
-    startSession({
-      mode: s.config.mode,
-      deck: s.config.deck,
-      direction: s.config.direction,
-      items: s.config.items,
-      label: s.config.label
-    });
+    startSession({ deck: s.config.deck, mode: s.config.mode, scope: s.config.scope, count: s.config.count, label: s.config.label });
   }
 
   function reviewMissed() {
     var s = state.session;
     if (!s) return;
-    var items = s.results.filter(function (r) { return !r.correct; })
-      .map(function (r) { return state.byId.get(r.itemId); })
-      .filter(Boolean);
-    if (!items.length) { toast('No missed cards to review.'); return; }
-    startSession({
-      mode: 'flash',
-      deck: s.config.deck,
-      direction: s.config.direction,
-      items: items,
-      label: 'Review mistakes'
-    });
+    var cards = s.results.filter(function (r) { return !r.correct; }).map(function (r) { return r.card; });
+    if (!cards.length) return;
+    state.session = {
+      mode: 'flash', deck: s.deck, label: 'Review',
+      cards: cards, idx: 0, answered: null, flipped: false,
+      results: [], correct: 0, finished: false,
+      config: { deck: s.deck, mode: 'flash', count: cards.length, scope: 'all', label: 'Review' }
+    };
+    render();
   }
 
   function endSession() {
@@ -1570,725 +1433,292 @@
     render();
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Home view
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Views
+   * ---------------------------------------------------------------- */
 
-  function statCard(label, value, sub, p, accent) {
-    return '<div class="card stat-card' + (accent ? ' accent' : '') + '">' +
-      '<div class="stat-label">' + esc(label) + '</div>' +
-      '<div class="stat-value">' + value + '</div>' +
-      '<div class="stat-sub">' + esc(sub) + '</div>' +
-      '<div class="bar' + (accent ? ' vermilion' : '') + '"><span style="width:' + clamp(p || 0, 0, 100) + '%"></span></div>' +
-      '</div>';
-  }
-
-  function deckCard(deck) {
-    var meta = DECK_META[deck];
-    var stats = deckStats(deck);
-    var browse = deck === 'structures' ? 'grammar' : deck;
-    return '<article class="card deck-card">' +
-      '<div class="deck-top">' +
-        '<div class="deck-icon ' + meta.tone + '" aria-hidden="true">' + meta.glyph + '</div>' +
-        '<div><div class="deck-name">' + meta.name + '</div><div class="deck-jp">' + meta.jp + '</div></div>' +
-      '</div>' +
-      '<p class="deck-desc">' + meta.desc + '</p>' +
-      '<div class="deck-nums"><span><b>' + stats.total + '</b> cards</span><span><b>' + stats.mastered + '</b> strong</span><span><b>' + stats.due + '</b> due</span></div>' +
-      '<div class="bar"><span style="width:' + stats.pct + '%"></span></div>' +
-      '<div class="deck-actions">' +
-        '<a class="btn btn-outline btn-sm" href="#' + browse + '">Browse</a>' +
-        '<button class="btn btn-soft btn-sm" data-action="start" data-deck="' + deck + '" data-mode="quiz" data-scope="smart">Quiz</button>' +
-      '</div>' +
-    '</article>';
+  function statusDot(id) {
+    var st = statusOf(id);
+    return '<span class="dot ' + (st === 'new' ? '' : st) + '" aria-hidden="true"></span>';
   }
 
   function homeView() {
-    var v = deckStats('vocab');
-    var k = deckStats('kanji');
-    var g = deckStats('structures');
+    var v = statsFor('vocab');
+    var k = statsFor('kanji');
+    var g = statsFor('structures');
     var due = v.due + k.due + g.due;
-    var total = v.total + k.total + g.total;
-    var correct = v.correct + k.correct + g.correct;
-    var wrong = v.wrong + k.wrong + g.wrong;
-    var accuracy = correct + wrong ? percent(correct, correct + wrong) : null;
-    var today = state.activity[dateKey(new Date())] || 0;
-    var streak = streakCount();
-    var duePct = percent(due, total);
+    var totalDone = v.mastered + k.mastered + g.mastered;
+    var attempts = v.correct + v.wrong + k.correct + k.wrong + g.correct + g.wrong;
+    var accuracy = attempts ? percent(v.correct + k.correct + g.correct, attempts) : null;
 
-    return '<section class="hero">' +
-      '<div class="hero-copy">' +
-        '<div class="eyebrow">Year 8 · Japanese · 日本語</div>' +
-        '<h1 class="hero-title">Your Japanese <em>study desk</em>.</h1>' +
-        '<p class="hero-sub">' + v.total + ' words, ' + k.total + ' kanji and ' + g.total +
-          ' grammar patterns from your class notes, all in one place. Flip cards, take quizzes, and let smart review bring back what you are about to forget.</p>' +
-        '<div class="hero-actions">' +
-          '<a class="btn btn-primary btn-lg" href="#study">Start studying</a>' +
-          (due > 0
-            ? '<button class="btn btn-outline btn-lg" data-action="quick-review">Review ' + due + ' due</button>'
-            : '<a class="btn btn-outline btn-lg" href="#vocab">Browse vocabulary</a>') +
-        '</div>' +
-        '<div class="hero-meta">' +
-          '<span>' + (streak > 0 ? '<b>' + streak + '</b>-day streak' : 'Ready when you are') + '</span>' +
-          '<span><b>' + today + '</b> review' + (today === 1 ? '' : 's') + ' today</span>' +
-          (accuracy !== null ? '<span><b>' + accuracy + '%</b> quiz accuracy</span>' : '') +
-        '</div>' +
+    var decks = [
+      ['#vocab', 'Vocabulary', v.total + ' words' + (v.mastered ? ' · ' + v.mastered + ' strong' : '')],
+      ['#kanji', 'Kanji', k.total + ' characters' + (k.mastered ? ' · ' + k.mastered + ' strong' : '')],
+      ['#grammar', 'Grammar', g.total + ' patterns' + (g.mastered ? ' · ' + g.mastered + ' strong' : '')],
+      ['#study', 'Sentences', FRAMES.length + ' sentence frames']
+    ];
+
+    return '<div class="page">' +
+      '<h1 class="home-title">Year 8 Japanese</h1>' +
+      '<p class="home-sub">Vocabulary, kanji and grammar from your class notes — with sentences built from the words you know.</p>' +
+      '<div class="home-actions">' +
+        '<a class="btn btn-solid" href="#study">Study</a>' +
+        '<button class="btn" data-action="sentence-practice">Practise sentences</button>' +
+        (due ? '<button class="btn" data-action="quick-review">' + due + ' due</button>' : '') +
       '</div>' +
-      '<aside class="hero-art" aria-hidden="true">' +
-        '<div class="hero-kanji">学</div>' +
-        '<div class="hero-art-caption">まなぶ · to learn</div>' +
-        '<div class="seal">日本語</div>' +
-      '</aside>' +
-    '</section>' +
-
-    '<div class="stats">' +
-      statCard('Vocabulary', v.mastered, 'of ' + v.total + ' strong', v.pct) +
-      statCard('Kanji', k.mastered, 'of ' + k.total + ' strong', k.pct) +
-      statCard('Grammar', g.mastered, 'of ' + g.total + ' strong', g.pct) +
-      '<div class="card stat-card accent">' +
-        '<div class="stat-label">Due for review</div>' +
-        '<div class="stat-value">' + due + '</div>' +
-        '<div class="stat-sub">' + (due ? 'cards waiting for you' : 'all caught up') + '</div>' +
-        '<div class="bar vermilion"><span style="width:' + duePct + '%"></span></div>' +
+      '<div class="stats-line">' +
+        '<span>' + totalDone + ' strong</span>' +
+        (accuracy !== null ? '<span>' + accuracy + '% accuracy</span>' : '<span>No reviews yet</span>') +
+        (due ? '<span>' + due + ' due</span>' : '<span>Nothing due</span>') +
       '</div>' +
-    '</div>' +
-
-    (due > 0
-      ? '<div class="review-banner">' +
-          '<div class="icon" aria-hidden="true">↻</div>' +
-          '<div><h3>' + due + ' cards are ready for review</h3><p>Smart review mixes vocabulary, kanji and grammar at the right time.</p></div>' +
-          '<button class="btn btn-vermilion" data-action="quick-review">Review now</button>' +
-        '</div>'
-      : '') +
-
-    '<div class="section-head"><h2>Choose a deck</h2><a class="link" href="#study">Study settings →</a></div>' +
-    '<div class="deck-grid">' + ['vocab', 'kanji', 'structures'].map(deckCard).join('') + '</div>' +
-
-    '<div class="section-head"><h2>How review works</h2></div>' +
-    '<div class="card how-card">' +
-      '<div><h3>Small steps, long memory</h3><p>Every answer moves that card up or down a level. Strong cards come back in 1, 2, 4, then 7 days; a missed card returns tomorrow. Smart review pulls due cards first, then fills the rest of your session with new material.</p></div>' +
-      '<div class="how-steps"><span class="how-step">1 · New</span><span class="how-step">2 · Learning</span><span class="how-step">3 · Strong</span><span class="how-step">4 · Mastered</span></div>' +
+      '<div class="quiet-list">' +
+        decks.map(function (d) {
+          return '<a class="quiet-row" href="' + d[0] + '"><span class="label">' + d[1] + '</span><span class="n">' + d[2] + '</span></a>';
+        }).join('') +
+      '</div>' +
     '</div>';
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Vocabulary view
-   * ------------------------------------------------------------------ */
-
-  function statusRank(id) {
-    var st = statusOf(id);
-    return st === 'new' ? 0 : st === 'learning' ? 1 : 2;
-  }
-
-  function getFilteredVocab() {
-    var q = state.ui.vocabQuery.trim().toLowerCase();
-    var list = state.items.vocab.filter(function (item) {
-      if (!q) return true;
-      return item.en.toLowerCase().indexOf(q) !== -1 || item.jp.indexOf(q) !== -1;
-    });
-    var sort = state.ui.vocabSort;
-    if (sort === 'jp') {
-      list.sort(function (a, b) { return a.jp.localeCompare(b.jp, 'ja'); });
-    } else if (sort === 'status') {
-      list.sort(function (a, b) {
-        var d = statusRank(a.id) - statusRank(b.id);
-        return d !== 0 ? d : a.en.localeCompare(b.en);
-      });
-    } else {
-      list.sort(function (a, b) { return a.en.localeCompare(b.en); });
-    }
-    return list;
-  }
-
-  function vocabCountHtml() {
-    var list = getFilteredVocab();
-    var seen = state.items.vocab.filter(function (it) { return state.progress[it.id]; }).length;
-    return '<b>' + list.length + '</b> of ' + state.items.vocab.length + ' words · ' + seen + ' practised';
-  }
-
-  function vocabResultsHtml() {
-    var list = getFilteredVocab();
-    if (!list.length) {
-      return '<div class="empty" style="grid-column:1/-1"><div class="big">単語</div><p>No words match “' + esc(state.ui.vocabQuery) + '”.</p><button class="btn btn-outline btn-sm" data-action="clear-browse" data-deck="vocab">Clear search</button></div>';
-    }
-    return list.map(function (item) {
-      var st = statusOf(item.id);
-      return '<div class="vocab-card">' +
-        '<div class="vocab-top">' +
-          '<span class="vocab-en">' + esc(item.en) + '</span>' +
-          speakBtn(item.jp) +
-        '</div>' +
-        '<div class="vocab-jp" lang="ja">' + esc(item.jp) + '</div>' +
-        '<div class="vocab-status status-line">' + statusDot(st) + statusLabel(st) + '</div>' +
-      '</div>';
-    }).join('');
   }
 
   function vocabView() {
-    var stats = deckStats('vocab');
-    return '<div class="page-head">' +
-      '<div><div class="eyebrow">単語 · Vocabulary</div><h1>Vocabulary</h1><p>' + stats.total +
-        ' words from class vocabulary sheets. Search in English or 日本語, then study the ones you need.</p></div>' +
-      headStats([[stats.total, 'Words'], [stats.mastered, 'Strong'], [stats.due, 'Due']]) +
-    '</div>' +
-    '<div class="toolbar">' +
-      '<label class="search">' + ICON.search +
-        '<input id="vocab-search" type="search" placeholder="Search English or 日本語…" value="' + esc(state.ui.vocabQuery) + '" autocomplete="off" aria-label="Search vocabulary">' +
-      '</label>' +
-      '<select class="control" id="vocab-sort" aria-label="Sort vocabulary">' +
-        '<option value="en"' + (state.ui.vocabSort === 'en' ? ' selected' : '') + '>A–Z English</option>' +
-        '<option value="jp"' + (state.ui.vocabSort === 'jp' ? ' selected' : '') + '>Japanese order</option>' +
-        '<option value="status"' + (state.ui.vocabSort === 'status' ? ' selected' : '') + '>Review status</option>' +
-      '</select>' +
-      '<button class="btn btn-primary btn-sm" data-action="practise-filtered" data-deck="vocab">Study these</button>' +
-    '</div>' +
-    '<div class="results-meta">' +
-      '<span id="vocab-count">' + vocabCountHtml() + '</span>' +
-      '<div class="legend">' +
-        '<span>' + statusDot('new') + ' New</span>' +
-        '<span>' + statusDot('learning') + ' Learning</span>' +
-        '<span>' + statusDot('mastered') + ' Strong</span>' +
-      '</div>' +
-    '</div>' +
-    '<div class="vocab-grid" id="vocab-results">' + vocabResultsHtml() + '</div>';
-  }
-
-  function headStats(entries) {
-    return '<div class="head-stats">' + entries.map(function (entry) {
-      return '<div class="head-stat"><b>' + entry[0] + '</b><span>' + entry[1] + '</span></div>';
-    }).join('') + '</div>';
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Kanji view
-   * ------------------------------------------------------------------ */
-
-  function getFilteredKanji() {
-    var q = state.ui.kanjiQuery.trim().toLowerCase();
-    var filter = state.ui.kanjiFilter;
-    return state.items.kanji.filter(function (item) {
-      var st = statusOf(item.id);
-      if (filter === 'must' && !item.entry.mandatory_in_vault) return false;
-      if (filter === 'new' && st !== 'new') return false;
-      if (filter === 'learning' && st !== 'learning') return false;
-      if (filter === 'mastered' && st !== 'mastered') return false;
-      if (!q) return true;
-      var haystack = [item.kanji, item.meanings.join(' '), item.on.join(' '), item.kun.join(' '),
-        (item.entry.notes || '')].join(' ').toLowerCase();
-      return haystack.indexOf(q) !== -1;
+    var q = state.ui.vocabQuery.trim().toLowerCase();
+    var list = state.items.vocab.filter(function (item) {
+      return !q || item.en.toLowerCase().indexOf(q) !== -1 || item.jp.indexOf(q) !== -1;
     });
-  }
-
-  function kanjiCountHtml() {
-    var list = getFilteredKanji();
-    return '<b>' + list.length + '</b> of ' + state.items.kanji.length + ' characters';
-  }
-
-  function kanjiResultsHtml() {
-    var list = getFilteredKanji();
-    if (!list.length) {
-      return '<div class="empty" style="grid-column:1/-1"><div class="big">漢字</div><p>No kanji match those filters.</p><button class="btn btn-outline btn-sm" data-action="clear-browse" data-deck="kanji">Clear filters</button></div>';
-    }
-    return list.map(function (item) {
-      var st = statusOf(item.id);
-      return '<button type="button" class="kanji-tile" data-action="open-kanji" data-id="' + esc(item.id) + '" aria-label="' + esc(item.kanji + ', ' + item.meanings.join(', ')) + '">' +
-        '<span class="kanji-num">' + statusDot(st) + '</span>' +
-        '<span class="kanji-glyph" lang="ja">' + esc(item.kanji) + '</span>' +
-        '<span class="kanji-mean">' + esc(item.meanings.join(' / ')) + '</span>' +
-        '<span class="status-line">' + statusDot(st) + statusLabel(st) + '</span>' +
-      '</button>';
-    }).join('');
-  }
-
-  function kanjiView() {
-    var stats = deckStats('kanji');
-    var filters = [
-      ['all', 'All'], ['must', 'Must-know'], ['new', 'New'],
-      ['learning', 'Learning'], ['mastered', 'Strong']
-    ];
-    return '<div class="page-head">' +
-      '<div><div class="eyebrow">漢字 · Kanji</div><h1>Kanji</h1><p>' + stats.total +
-        ' characters from the course. Open a character to see its readings, the words it appears in, and notes from the Vault.</p></div>' +
-      headStats([[stats.total, 'Kanji'], [stats.mastered, 'Strong'], [stats.due, 'Due']]) +
-    '</div>' +
-    '<div class="toolbar">' +
-      '<label class="search">' + ICON.search +
-        '<input id="kanji-search" type="search" placeholder="Search kanji, meaning or reading…" value="' + esc(state.ui.kanjiQuery) + '" autocomplete="off" aria-label="Search kanji">' +
-      '</label>' +
-    '</div>' +
-    '<div class="filters" style="margin-bottom:16px" role="group" aria-label="Filter kanji">' +
-      filters.map(function (f) {
-        return '<button type="button" class="chip' + (state.ui.kanjiFilter === f[0] ? ' active' : '') + '" data-action="kanji-filter" data-value="' + f[0] + '">' + f[1] + '</button>';
-      }).join('') +
-    '</div>' +
-    '<div class="results-meta"><span id="kanji-count">' + kanjiCountHtml() + '</span><span class="legend"><span>Tap a character for details</span></span></div>' +
-    '<div class="kanji-grid" id="kanji-results">' + kanjiResultsHtml() + '</div>';
-  }
-
-  function kanjiModal(item) {
-    var e = item.entry;
-    var st = statusOf(item.id);
-    var readings = (e.pronunciations && e.pronunciations.readings_in_content) || [];
-    var badges = '';
-    if (e.mandatory_in_vault) badges += '<span class="badge badge-vermilion">Must-know</span>';
-    badges += '<span class="badge badge-' + (st === 'mastered' ? 'green' : st === 'learning' ? 'gold' : 'indigo') + '">' + statusLabel(st) + '</span>';
-    if (e.occurrence_count_in_extracted_pdf_text) {
-      badges += '<span class="badge">' + e.occurrence_count_in_extracted_pdf_text + ' mentions</span>';
-    }
-
-    var readingRows = readings.map(function (r) {
-      return '<div class="reading-row">' +
-        '<div class="jp" lang="ja">' + esc(r.written_form) + '</div>' +
-        '<div class="jp" lang="ja">' + esc(r.word_reading_kana) + '</div>' +
-        '<div class="jp" lang="ja">' + esc(r.this_kanji_reading || '—') + '</div>' +
-        '<div>' + esc(r.meaning_or_context || '') + '</div>' +
+    var rows = list.length ? list.map(function (item) {
+      return '<div class="row">' + statusDot(item.id) +
+        '<span class="en">' + esc(item.en) + '</span>' +
+        '<span class="jp" lang="ja">' + esc(item.jp) + '</span>' +
+        speakBtn(item.jp) +
       '</div>';
-    }).join('');
+    }).join('') : '<p class="empty">No words match “' + esc(state.ui.vocabQuery) + '”.</p>';
 
-    return '<div class="modal-overlay" data-action="close-modal">' +
-      '<div class="modal" role="dialog" aria-modal="true" aria-label="Kanji ' + esc(item.kanji) + '" data-action="noop">' +
-        '<div class="modal-top">' +
-          '<div class="kanji-hero" lang="ja" aria-hidden="true">' + esc(item.kanji) + '</div>' +
-          '<div>' +
-            '<div class="modal-sub">Kanji</div>' +
-            '<h2>' + esc(item.meanings.join(' / ')) + '</h2>' +
-            '<div class="modal-badges">' + badges + '</div>' +
-          '</div>' +
-          '<button class="icon-btn modal-close" data-action="close-modal" aria-label="Close details">' + ICON.close + '</button>' +
-        '</div>' +
-        '<div class="modal-section">' +
-          '<h3>Readings</h3>' +
-          '<div class="reading-grid">' +
-            '<div class="reading-box"><div class="label">On-yomi · 音読み</div><div class="val jp" lang="ja">' + esc(item.on.join('・') || '—') + '</div></div>' +
-            '<div class="reading-box"><div class="label">Kun-yomi · 訓読み</div><div class="val jp" lang="ja">' + esc(item.kun.join('・') || '—') + '</div></div>' +
-          '</div>' +
-        '</div>' +
-        (readings.length
-          ? '<div class="modal-section"><h3>In the course content</h3><div class="reading-table">' +
-              '<div class="reading-row head"><div>Written</div><div>Reading</div><div>This kanji</div><div>Meaning / context</div></div>' +
-              readingRows +
-            '</div></div>'
-          : '') +
-        (e.notes ? '<div class="modal-section"><div class="note"><b>Note</b><span>' + esc(e.notes) + '</span></div></div>' : '') +
-        (e.sources && e.sources.length ? '<div class="modal-section">' + sourcesHtml(e.sources) + '</div>' : '') +
-        '<div class="modal-actions">' +
-          speakBtn(item.kanji, 'Play pronunciation') +
-          '<button class="btn btn-outline btn-sm" data-action="practise-item" data-id="' + esc(item.id) + '">Practise this kanji</button>' +
-          '<button class="btn btn-primary btn-sm" data-action="close-modal" style="margin-left:auto">Close</button>' +
-        '</div>' +
-      '</div>' +
+    return '<div class="page">' +
+      '<div class="page-head"><h1>Vocabulary</h1><span class="count">' + list.length + ' of ' + state.items.vocab.length + '</span></div>' +
+      '<div class="bar"><input type="search" id="vocab-search" placeholder="Search English or 日本語" value="' + esc(state.ui.vocabQuery) + '" aria-label="Search vocabulary" autocomplete="off"></div>' +
+      '<div class="rows">' + rows + '</div>' +
     '</div>';
   }
 
-  function openKanji(id) {
-    var item = state.byId.get(id);
-    if (!item) return;
-    state.modal = { id: id };
-    $('#modal-root').innerHTML = kanjiModal(item);
-    document.body.classList.add('modal-open');
-    var close = $('.modal-close');
-    if (close) close.focus();
-  }
-
-  function closeModal() {
-    state.modal = null;
-    $('#modal-root').innerHTML = '';
-    document.body.classList.remove('modal-open');
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Grammar view
-   * ------------------------------------------------------------------ */
-
-  function getFilteredStructures() {
-    var q = state.ui.structQuery.trim().toLowerCase();
-    return state.items.structures.filter(function (item) {
-      var e = item.entry;
-      if (state.ui.structCat !== 'all' && e.category !== state.ui.structCat) return false;
-      if (state.ui.structType !== 'all' && e.structure_type !== state.ui.structType) return false;
+  function kanjiView() {
+    var q = state.ui.kanjiQuery.trim().toLowerCase();
+    var list = state.items.kanji.filter(function (item) {
       if (!q) return true;
-      var haystack = [e.name, e.pattern, e.english_template, e.formation, e.category,
-        (e.example && e.example.japanese) || '', (e.example && e.example.english) || ''].join(' ').toLowerCase();
-      return haystack.indexOf(q) !== -1;
+      var hay = [item.kanji, item.meanings.join(' '), item.on.join(' '), item.kun.join(' '), item.entry.notes || ''].join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
     });
-  }
+    var rows = list.length ? list.map(function (item) {
+      var words = item.readings.map(function (r) {
+        return '<span><b lang="ja">' + esc(r.written_form) + '</b> ' + esc(r.word_reading_kana) +
+          (r.meaning_or_context ? ' · ' + esc(r.meaning_or_context) : '') + '</span>';
+      }).join('');
+      return '<details class="krow">' +
+        '<summary>' + statusDot(item.id) +
+          '<span class="kanji" lang="ja">' + esc(item.kanji) + '</span>' +
+          '<span class="mean">' + esc(item.meanings.join(' / ')) + '</span>' +
+          '<span class="read" lang="ja">' + esc(item.on.concat(item.kun).join('・')) + '</span>' +
+        '</summary>' +
+        '<div class="kbody">' +
+          '<dl>' +
+            '<dt>On</dt><dd lang="ja">' + esc(item.on.join('・') || '—') + '</dd>' +
+            '<dt>Kun</dt><dd lang="ja">' + esc(item.kun.join('・') || '—') + '</dd>' +
+          '</dl>' +
+          (words ? '<div class="words">' + words + '</div>' : '') +
+          (item.entry.notes ? '<p class="note">' + esc(item.entry.notes) + '</p>' : '') +
+          sourcesHtml(item.entry.sources) +
+        '</div>' +
+      '</details>';
+    }).join('') : '<p class="empty">No kanji match that search.</p>';
 
-  function structCountHtml() {
-    var list = getFilteredStructures();
-    return '<b>' + list.length + '</b> of ' + state.items.structures.length + ' patterns';
-  }
-
-  function structureCard(item) {
-    var e = item.entry;
-    var type = TYPE_META[e.structure_type] || { label: e.structure_type || 'Pattern', tone: 'badge-indigo' };
-    var st = statusOf(item.id);
-    var ex = e.example;
-    var body = '';
-
-    if (ex && ex.japanese) {
-      body += '<div class="example">' +
-        '<div class="example-row"><span class="ex-tag">例</span><div class="example-jp jp" lang="ja">' + esc(ex.japanese) + '</div>' + speakBtn(ex.japanese) + '</div>' +
-        (ex.english ? '<div class="example-en">' + esc(ex.english) + '</div>' : '') +
-      '</div>';
-    }
-
-    (e.variants || []).forEach(function (variant) {
-      body += '<div class="variant">' +
-        '<div class="pattern-line jp" lang="ja" style="font-size:17px">' + esc(variant.pattern) + '</div>' +
-        '<div class="pattern-english">' + esc(variant.english_template) + '</div>' +
-        (variant.example && variant.example.japanese
-          ? '<div class="example"><div class="example-row"><span class="ex-tag">例</span><div class="example-jp jp" lang="ja">' + esc(variant.example.japanese) + '</div>' + speakBtn(variant.example.japanese) + '</div>' +
-            (variant.example.english ? '<div class="example-en">' + esc(variant.example.english) + '</div>' : '') + '</div>'
-          : '') +
-      '</div>';
-    });
-
-    return '<article class="card pattern-card">' +
-      '<div class="pattern-meta">' +
-        '<span class="badge ' + type.tone + '">' + esc(type.label) + '</span>' +
-        '<span class="cat">' + esc(e.category) + '</span>' +
-        '<span class="cat" style="margin-left:auto;display:inline-flex;align-items:center;gap:6px">' + statusDot(st) + statusLabel(st) + '</span>' +
-      '</div>' +
-      '<div class="pattern-name">' + esc(e.name) + '</div>' +
-      '<div class="pattern-line jp" lang="ja">' + esc(e.pattern) + '</div>' +
-      '<div class="pattern-english">' + esc(e.english_template) + '</div>' +
-      '<div class="formation"><b>How it works</b>' + esc(e.formation) + '</div>' +
-      body +
-      (e.notes ? '<div class="note"><b>Note</b><span>' + esc(e.notes) + '</span></div>' : '') +
-      sourcesHtml(e.sources) +
-    '</article>';
-  }
-
-  function structureResultsHtml() {
-    var list = getFilteredStructures();
-    if (!list.length) {
-      return '<div class="empty"><div class="big">文法</div><p>No patterns match those filters.</p><button class="btn btn-outline btn-sm" data-action="clear-browse" data-deck="grammar">Clear filters</button></div>';
-    }
-    return list.map(structureCard).join('');
+    return '<div class="page">' +
+      '<div class="page-head"><h1>Kanji</h1><span class="count">' + list.length + ' of ' + state.items.kanji.length + '</span></div>' +
+      '<div class="bar"><input type="search" id="kanji-search" placeholder="Search kanji, meaning or reading" value="' + esc(state.ui.kanjiQuery) + '" aria-label="Search kanji" autocomplete="off"></div>' +
+      '<div class="rows">' + rows + '</div>' +
+    '</div>';
   }
 
   function grammarView() {
-    var stats = deckStats('structures');
-    var categories = [];
-    state.items.structures.forEach(function (item) {
-      var c = item.entry.category;
-      if (c && categories.indexOf(c) === -1) categories.push(c);
+    var q = state.ui.structQuery.trim().toLowerCase();
+    var list = state.items.structures.filter(function (item) {
+      if (!q) return true;
+      var s = item.entry;
+      var hay = [s.name, s.pattern, s.english_template, s.formation, s.category,
+        s.example ? s.example.japanese : '', s.example ? s.example.english : ''].join(' ').toLowerCase();
+      return hay.indexOf(q) !== -1;
     });
-    var types = [];
-    state.items.structures.forEach(function (item) {
-      var t = item.entry.structure_type;
-      if (t && types.indexOf(t) === -1) types.push(t);
-    });
+    var blocks = list.length ? list.map(function (item) {
+      var s = item.entry;
+      var variants = (s.variants || []).map(function (v) {
+        return '<div class="variant"><div class="jp-pattern jp" lang="ja">' + esc(v.pattern) + '</div>' +
+          '<div class="en-pattern">' + esc(v.english_template) + '</div>' +
+          (v.example ? '<div class="ex" lang="ja">' + esc(v.example.japanese) + ' <small>' + esc(v.example.english) + '</small></div>' : '') +
+          '</div>';
+      }).join('');
+      return '<article class="pattern">' +
+        '<div class="cat">' + esc(s.category) + '</div>' +
+        '<div class="name">' + esc(s.name) + '</div>' +
+        '<div class="jp-pattern jp" lang="ja">' + esc(s.pattern) + '</div>' +
+        '<div class="en-pattern">' + esc(s.english_template) + '</div>' +
+        (s.example ? '<div class="ex" lang="ja">' + esc(s.example.japanese) + speakBtn(s.example.japanese) +
+          ' <small>' + esc(s.example.english) + '</small></div>' : '') +
+        variants +
+        '<details><summary>How it works</summary><p>' + esc(s.formation) + '</p>' +
+          (s.notes ? '<p>' + esc(s.notes) + '</p>' : '') + sourcesHtml(s.sources) +
+        '</details>' +
+      '</article>';
+    }).join('') : '<p class="empty">No patterns match that search.</p>';
 
-    return '<div class="page-head">' +
-      '<div><div class="eyebrow">文法 · Grammar</div><h1>Grammar patterns</h1><p>' +
-        stats.total + ' sentence patterns, question patterns and verb formations from your notes, with examples and how each one is built.</p></div>' +
-      headStats([[stats.total, 'Patterns'], [stats.mastered, 'Strong'], [stats.due, 'Due']]) +
-    '</div>' +
-    '<div class="toolbar">' +
-      '<label class="search">' + ICON.search +
-        '<input id="struct-search" type="search" placeholder="Search patterns, meanings or examples…" value="' + esc(state.ui.structQuery) + '" autocomplete="off" aria-label="Search grammar patterns">' +
-      '</label>' +
-      '<select class="control" id="struct-cat" aria-label="Filter by category">' +
-        '<option value="all">All categories</option>' +
-        categories.map(function (c) {
-          return '<option value="' + esc(c) + '"' + (state.ui.structCat === c ? ' selected' : '') + '>' + esc(c) + '</option>';
-        }).join('') +
-      '</select>' +
-      '<select class="control" id="struct-type" aria-label="Filter by pattern type">' +
-        '<option value="all">All types</option>' +
-        types.map(function (t) {
-          var meta = TYPE_META[t] || { label: t };
-          return '<option value="' + esc(t) + '"' + (state.ui.structType === t ? ' selected' : '') + '>' + esc(meta.label) + '</option>';
-        }).join('') +
-      '</select>' +
-    '</div>' +
-    '<div class="results-meta"><span id="struct-count">' + structCountHtml() + '</span></div>' +
-    '<div class="pattern-list" id="struct-results">' + structureResultsHtml() + '</div>';
+    return '<div class="page">' +
+      '<div class="page-head"><h1>Grammar</h1><span class="count">' + list.length + ' of ' + state.items.structures.length + '</span></div>' +
+      '<div class="bar"><input type="search" id="struct-search" placeholder="Search patterns or meanings" value="' + esc(state.ui.structQuery) + '" aria-label="Search grammar" autocomplete="off"></div>' +
+      '<div>' + blocks + '</div>' +
+    '</div>';
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Study setup
-   * ------------------------------------------------------------------ */
-
-  function segButton(group, value, label, sub, active) {
-    return '<button type="button" class="seg-btn' + (active ? ' active' : '') + '" data-action="setup" data-key="' + group + '" data-value="' + value + '">' +
-      label + (sub ? '<small>' + sub + '</small>' : '') + '</button>';
-  }
-
-  function studyAside() {
-    var due = ['vocab', 'kanji', 'structures'].map(function (deck) {
-      var stats = deckStats(deck);
-      return '<li><span>' + DECK_META[deck].name + '</span><b>' + stats.due + ' due</b></li>';
-    }).join('');
-    return '<aside class="card study-aside">' +
-      '<h3>Smart review</h3>' +
-      '<p>Cards you get right move up a level and return after 1, 2, 4 then 7 days. Miss one and it comes back tomorrow. New cards fill any session that is not yet full.</p>' +
-      '<ul class="due-list">' + due + '</ul>' +
-      '<p class="kbd-hint"><kbd>1</kbd>–<kbd>4</kbd> choose an answer · <kbd>Enter</kbd> next<br><kbd>Space</kbd> flip a card · <kbd>←</kbd><kbd>→</kbd> grade</p>' +
-    '</aside>';
+  function seg(key, value, label) {
+    return '<button type="button" data-action="setup" data-key="' + key + '" data-value="' + value + '" aria-pressed="' +
+      (String(state.setup[key]) === String(value)) + '">' + label + '</button>';
   }
 
   function studyView() {
     var s = state.session;
-    if (s) {
-      if (s.finished) return '<div class="session">' + resultsView(s) + '</div>';
-      return '<div class="session">' + sessionHeader(s) + (s.mode === 'quiz' ? quizView(s) : flashView(s)) + '</div>';
-    }
+    if (s) return '<div class="page">' + (s.finished ? resultsView(s) : sessionHeader(s) + (s.mode === 'quiz' ? quizView(s) : flashView(s))) + '</div>';
 
     var setup = state.setup;
-    var deckCounts = {
-      vocab: state.items.vocab.length,
-      kanji: state.items.kanji.length,
-      structures: state.items.structures.length,
-      mixed: state.items.vocab.length + state.items.kanji.length + state.items.structures.length
-    };
     var available = previewCount(setup.deck, setup.scope);
-    var actual = setup.count === 'all' ? available : Math.min(Number(setup.count), available);
+    var counts = { vocab: state.items.vocab.length, kanji: state.items.kanji.length, structures: state.items.structures.length, sentences: FRAMES.length };
+    var isSentences = setup.deck === 'sentences';
+    var groups = ['all', 'adjs', 'verbs', 'places', 'food', 'family', 'questions'];
 
-    return '<div class="page-head">' +
-      '<div><div class="eyebrow">Study · 勉強</div><h1>Study session</h1><p>Pick a deck, a mode and how many cards you want. Smart review starts with whatever is due.</p></div>' +
-    '</div>' +
-    '<div class="setup-grid">' +
-      '<div class="card setup-card">' +
-        '<div class="field">' +
-          '<div class="field-label"><span>Deck</span><em>' + deckCounts[setup.deck] + ' cards</em></div>' +
-          '<div class="seg">' +
-            segButton('deck', 'vocab', 'Vocabulary', '単語 · ' + deckCounts.vocab, setup.deck === 'vocab') +
-            segButton('deck', 'kanji', 'Kanji', '漢字 · ' + deckCounts.kanji, setup.deck === 'kanji') +
-            segButton('deck', 'structures', 'Grammar', '文法 · ' + deckCounts.structures, setup.deck === 'structures') +
-            segButton('deck', 'mixed', 'Everything', 'Mixed · ' + deckCounts.mixed, setup.deck === 'mixed') +
-          '</div>' +
-        '</div>' +
-        '<div class="field">' +
-          '<div class="field-label"><span>Mode</span></div>' +
-          '<div class="seg">' +
-            segButton('mode', 'quiz', 'Multiple choice', 'Choose 1 of 4', setup.mode === 'quiz') +
-            segButton('mode', 'flash', 'Flashcards', 'Reveal and self-grade', setup.mode === 'flash') +
-          '</div>' +
-        '</div>' +
-        '<div class="field">' +
-          '<div class="field-label"><span>What to study</span><em>' + available + ' cards available</em></div>' +
-          '<div class="seg">' +
-            segButton('scope', 'smart', 'Smart review', 'Due + new', setup.scope === 'smart') +
-            segButton('scope', 'new', 'New cards', 'Never seen', setup.scope === 'new') +
-            segButton('scope', 'tricky', 'Tricky', 'Often missed', setup.scope === 'tricky') +
-            segButton('scope', 'all', 'All cards', 'Anything', setup.scope === 'all') +
-          '</div>' +
-        '</div>' +
-        '<div class="field">' +
-          '<div class="field-label"><span>Session length</span></div>' +
-          '<div class="seg">' +
-            segButton('count', '10', '10', '', setup.count === 10) +
-            segButton('count', '20', '20', '', setup.count === 20) +
-            segButton('count', '30', '30', '', setup.count === 30) +
-            segButton('count', 'all', 'All', '', setup.count === 'all') +
-          '</div>' +
-        '</div>' +
-        (setup.deck === 'vocab' || setup.deck === 'mixed'
-          ? '<div class="field">' +
-              '<div class="field-label"><span>Prompt side</span></div>' +
-              '<div class="seg">' +
-                segButton('direction', 'en2jp', 'English → 日本語', '', setup.direction === 'en2jp') +
-                segButton('direction', 'jp2en', '日本語 → English', '', setup.direction === 'jp2en') +
-                segButton('direction', 'mixed', 'Both ways', 'Mixed', setup.direction === 'mixed') +
-              '</div>' +
-            '</div>'
+    return '<div class="page">' +
+      '<div class="page-head"><h1>Study</h1></div>' +
+      '<div class="setup">' +
+        '<div class="field"><label>Mode</label><div class="seg">' + seg('mode', 'quiz', 'Quiz') + seg('mode', 'flash', 'Flashcards') + '</div></div>' +
+        '<div class="field"><label>Deck</label><div class="seg">' +
+          seg('deck', 'vocab', 'Vocabulary') + seg('deck', 'kanji', 'Kanji') +
+          seg('deck', 'structures', 'Grammar') + seg('deck', 'sentences', 'Sentences') +
+        '</div></div>' +
+        (isSentences
+          ? '<div class="field"><label>Sentence focus</label><div class="seg">' +
+              groups.map(function (g) { return seg('group', g, g === 'all' ? 'All' : META[g].name); }).join('') +
+            '</div></div>'
+          : '<div class="field"><label>What to study</label><div class="seg">' +
+              seg('scope', 'smart', 'Due + new') + seg('scope', 'new', 'New') +
+              seg('scope', 'tricky', 'Tricky') + seg('scope', 'all', 'All') +
+            '</div></div>') +
+        (setup.deck === 'vocab'
+          ? '<div class="field"><label>Prompt</label><div class="seg">' +
+              seg('direction', 'en2jp', 'English → 日本語') + seg('direction', 'jp2en', '日本語 → English') + seg('direction', 'mixed', 'Both') +
+            '</div></div>'
           : '') +
-        '<div class="setup-summary">' +
-          '<b>' + actual + '</b><span>cards ready</span>' +
-          '<span class="dot-sep"></span>' +
-          '<span>' + (setup.mode === 'quiz' ? 'Multiple choice' : 'Flashcards') + ' · ' + deckLabel(setup.deck) + '</span>' +
-          (available === 0 ? '<span class="dot-sep"></span><span>Try “All cards”</span>' : '') +
+        '<div class="field"><label>Cards</label><div class="seg">' +
+          ['8', '12', '20'].map(function (n) { return seg('count', n, n); }).join('') + seg('count', 'all', 'All') +
+        '</div></div>' +
+        '<div>' +
+          '<button class="btn btn-solid btn-wide" data-action="start-study">Start</button>' +
+          '<p class="start-note">' + (isSentences
+            ? 'Builds sentences from vocabulary that fits each pattern — adjectives with adjectives, food with food, places with places.'
+            : available + ' cards match this choice' + (available === 0 ? ' — try “All”.' : '.')) + '</p>' +
         '</div>' +
-        '<button class="btn btn-primary btn-lg btn-block" data-action="start-study"' + (actual === 0 ? ' disabled' : '') + '>' +
-          (setup.mode === 'quiz' ? 'Start quiz' : 'Start flashcards') + ' →' +
-        '</button>' +
       '</div>' +
-      studyAside() +
     '</div>';
   }
 
   function sessionHeader(s) {
-    var total = s.mode === 'quiz' ? s.questions.length : s.items.length;
-    var pos = s.mode === 'quiz' ? s.idx + 1 : s.index + 1;
-    var pct = percent(pos, total);
+    var total = s.cards.length;
+    var pos = s.idx + 1;
     return '<div class="session-top">' +
-      '<div class="session-title"><small>' + (s.mode === 'quiz' ? 'Quiz' : 'Flashcards') + '</small>' + esc(s.label) + '</div>' +
-      '<div class="session-progress" role="progressbar" aria-valuemin="0" aria-valuemax="' + total + '" aria-valuenow="' + pos + '"><span style="width:' + pct + '%"></span></div>' +
-      '<span class="session-counter">' + pos + ' / ' + total + '</span>' +
-      '<button class="btn btn-outline btn-sm" data-action="end-session">End</button>' +
+      '<span class="pos">' + pos + ' / ' + total + '</span>' +
+      '<span class="track"><span style="width:' + percent(pos, total) + '%"></span></span>' +
+      '<button class="btn btn-quiet btn-sm" data-action="end">End</button>' +
     '</div>';
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Quiz & flashcards
-   * ------------------------------------------------------------------ */
-
   function quizView(s) {
-    var q = s.questions[s.idx];
+    var card = s.cards[s.idx];
     var answered = s.answered;
-    var isLast = s.idx >= s.questions.length - 1;
-    var ok = answered !== null && answered === q.correctIndex;
+    var ok = answered !== null && answered === card.correctIndex;
+    var isLast = s.idx === s.cards.length - 1;
 
-    var optionsHtml = q.options.map(function (option, i) {
-      var cls = 'option';
+    var options = card.options.map(function (option, i) {
+      var cls = 'answer';
+      if (hasJa(option)) cls += ' jp';
+      if (card.kind === 'kanji' && /^[\u3400-\u9fff]$/.test(option)) cls += ' kanji';
+      if (String(option).length > 48) cls += ' long';
       if (answered !== null) {
-        if (i === q.correctIndex) cls += ' correct';
-        else if (i === answered) cls += ' wrong';
+        if (i === card.correctIndex) cls += ' ok';
+        else if (i === answered) cls += ' no';
         else cls += ' dim';
       }
-      if (q.optionKanji) cls += ' kanji';
-      else if (hasJa(option)) cls += ' jp';
-      if (String(option).length > 54) cls += ' long';
       return '<button type="button" class="' + cls + '" data-action="answer" data-index="' + i + '"' + (answered !== null ? ' disabled' : '') + '>' +
-        '<span class="key">' + (i + 1) + '</span>' +
-        '<span class="opt-text"' + (hasJa(option) ? ' lang="ja"' : '') + '>' + esc(option) + '</span>' +
+        '<span class="k">' + (i + 1) + '</span>' +
+        '<span class="t"' + (hasJa(option) ? ' lang="ja"' : '') + '>' + esc(option) + '</span>' +
       '</button>';
     }).join('');
 
-    var feedback = '';
-    if (answered !== null) {
-      feedback = '<div class="feedback ' + (ok ? 'ok' : 'bad') + '" role="status">' +
-        '<div class="feedback-head"><b>' + (ok ? '正解 · Correct' : 'おしい · Not quite') + '</b>' +
-          (q.speech ? speakBtn(q.speech, 'Play pronunciation') : '') +
-        '</div>' +
-        '<div class="feedback-body">' + q.explainHtml + '</div>' +
-        '<div class="feedback-foot">' +
-          '<button class="btn btn-primary" data-action="next">' + (isLast ? 'See results' : 'Next question') + ' →</button>' +
-        '</div>' +
-      '</div>';
-    }
+    var after = answered !== null
+      ? '<div class="after">' +
+          '<div class="verdict ' + (ok ? 'ok' : 'no') + '">' + (ok ? 'Correct' : 'Not quite') +
+            (card.speech ? ' ' + speakBtn(card.speech) : '') + '</div>' +
+          '<div class="detail">' + card.detailHtml + '</div>' +
+          '<div class="buttons"><button class="btn btn-solid" data-action="next">' + (isLast ? 'See results' : 'Next') + '</button></div>' +
+        '</div>'
+      : '<p class="shortcut">Press <kbd>1</kbd>–<kbd>4</kbd> to answer</p>';
 
-    return '<div class="card quiz-card">' +
-      '<div class="quiz-meta">' +
-        '<span class="badge badge-indigo">' + esc(DECK_META[q.deck] ? DECK_META[q.deck].name : 'Study') + '</span>' +
-        '<span class="muted" style="font-size:12px">' + esc(q.label) + '</span>' +
-        '<span class="spacer"></span>' +
-        '<span class="muted" style="font-size:11px">' + (q.deck === 'structures' ? 'Grammar pattern' : q.deck === 'kanji' ? 'Kanji' : 'Vocabulary') + '</span>' +
-      '</div>' +
-      '<div class="quiz-prompt' + (q.promptClass ? ' ' + q.promptClass : '') + (q.promptJa ? ' jp' : '') + '"' + (q.promptJa ? ' lang="ja"' : '') + '>' + esc(q.prompt) + '</div>' +
-      (q.deck === 'kanji' ? '<div class="prompt-note">' + (q.label === 'Meaning · kanji' ? 'Which character matches this meaning?' : q.label === 'Kanji · on-yomi' ? 'Which is an on-yomi of this character?' : 'What does this kanji mean?') + '</div>' : '') +
-      '<div class="options">' + optionsHtml + '</div>' +
-      feedback +
-      (answered === null ? '<p class="kbd-hint" style="text-align:center;margin-top:16px">Press <kbd>1</kbd>–<kbd>4</kbd> to answer</p>' : '') +
+    return '<div class="quiz">' +
+      '<div class="q-label">' + esc(card.label) + '</div>' +
+      '<div class="q-text ' + (card.promptClass || '') + (card.promptJa ? ' jp' : '') + '"' + (card.promptJa ? ' lang="ja"' : '') + '>' + card.prompt + '</div>' +
+      '<div class="answers">' + options + '</div>' +
+      after +
     '</div>';
   }
 
-  function flashMain(text, isJa, small) {
-    return '<div class="flash-main' + (isJa ? ' jp' : '') + (small ? ' small' : '') + '"' + (isJa ? ' lang="ja"' : '') + '>' + esc(text) + '</div>';
-  }
-
-  function flashFaces(item, direction) {
-    if (item.deck === 'vocab') {
-      var frontJa = direction === 'jp2en';
-      return {
-        front: '<div class="flash-label">' + (frontJa ? '日本語' : 'English') + '</div>' +
-          flashMain(frontJa ? item.jp : item.en, frontJa),
-        back: '<div class="flash-label">' + (frontJa ? 'English' : '日本語') + '</div>' +
-          flashMain(frontJa ? item.en : item.jp, !frontJa) +
-          '<div class="flash-sub">' + esc(item.en) + ' · Vocabulary</div>' +
-          speakBtn(item.jp)
-      };
-    }
-
-    if (item.deck === 'kanji') {
-      return {
-        front: '<div class="flash-label">Kanji</div>' +
-          '<div class="flash-main jp" lang="ja" style="font-family:var(--serif);font-size:90px;line-height:1.1">' + esc(item.kanji) + '</div>',
-        back: '<div class="flash-label">Meaning</div>' +
-          flashMain(item.meanings.join(' / '), false, true) +
-          '<div class="flash-sub">On: ' + esc(item.on.join('・') || '—') + '<br>Kun: ' + esc(item.kun.join('・') || '—') + '</div>' +
-          speakBtn(item.kanji)
-      };
-    }
-
-    var e = item.entry;
-    var ex = e.example;
-    return {
-      front: '<div class="flash-label">' + esc(e.category) + '</div>' +
-        flashMain(e.english_template, false, true) +
-        '<div class="flash-sub">' + esc(e.name) + '</div>',
-      back: '<div class="flash-label">Pattern</div>' +
-        flashMain(e.pattern, hasJa(e.pattern), true) +
-        '<div class="flash-sub">' + esc(e.formation) + '</div>' +
-        (ex && ex.japanese ? '<div class="flash-details jp" lang="ja">' + esc(ex.japanese) + ' — ' + esc(ex.english) + '</div>' : '')
-    };
-  }
-
   function flashView(s) {
-    var item = s.items[s.index];
-    var faces = flashFaces(item, s.config.direction);
-    var total = s.items.length;
-    var pos = s.index + 1;
-    return '<div class="flashcard' + (s.flipped ? ' flipped' : '') + '" role="button" tabindex="0" data-action="flip" aria-pressed="' + s.flipped + '" aria-label="Flashcard ' + pos + ' of ' + total + '. ' + (s.flipped ? 'Answer showing. Tap to flip back.' : 'Tap to reveal the answer.') + '">' +
-      '<div class="flash-inner">' +
-        '<div class="flash-face front">' + faces.front + '<span class="flash-hint">Tap to reveal</span></div>' +
-        '<div class="flash-face back">' + faces.back + '<span class="flash-hint">Tap to flip back</span></div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="flash-controls">' +
-      '<button type="button" class="btn btn-outline" data-action="grade" data-grade="0"' + (s.flipped ? '' : ' disabled') + '>Again <span class="muted">←</span></button>' +
-      '<button type="button" class="btn btn-primary" data-action="grade" data-grade="1"' + (s.flipped ? '' : ' disabled') + '>Got it <span>→</span></button>' +
-    '</div>' +
-    '<p class="kbd-hint" style="text-align:center">' + (s.flipped ? 'How did you do? Grade yourself to continue.' : 'Tap the card or press <kbd>Space</kbd> to reveal the answer.') + '</p>';
-  }
+    var card = s.cards[s.idx];
+    var front = '<div class="card-label">' + esc(card.label) + '</div>' +
+      '<div class="card-big ' + (card.promptClass === 'glyph' ? 'glyph' : '') + (card.promptJa ? ' jp' : '') + '"' + (card.promptJa ? ' lang="ja"' : '') + '>' +
+        card.prompt + '</div>' +
+      '<div class="card-hint">' + (s.flipped ? 'Tap to hide' : 'Tap to reveal') + '</div>';
 
-  /* ------------------------------------------------------------------ *
-   *  Results
-   * ------------------------------------------------------------------ */
+    var back = '<div class="card-label">Answer</div>' +
+      '<div class="card-big' + (card.kind === 'kanji' && !hasJa(card.answer) ? '' : ' jp') + '" lang="ja">' + esc(card.answer) + '</div>' +
+      '<div class="card-sub">' + (card.englishHtml || card.detailHtml) + '</div>' +
+      (card.speech ? speakBtn(card.speech) : '') +
+      '<div class="card-hint">Tap to hide</div>';
 
-  function itemSummary(item) {
-    if (!item) return '';
-    if (item.deck === 'vocab') {
-      return '<span class="jp" lang="ja">' + esc(item.jp) + '</span> <span class="en">' + esc(item.en) + '</span>';
-    }
-    if (item.deck === 'kanji') {
-      return '<span class="jp serif" lang="ja">' + esc(item.kanji) + '</span> <span class="en">' + esc(item.meanings.join(' / ')) + '</span>';
-    }
-    return '<span class="jp" lang="ja">' + esc(item.entry.pattern) + '</span> <span class="en">' + esc(item.entry.english_template) + '</span>';
+    return '<div class="card-face" role="button" tabindex="0" data-action="flip" aria-pressed="' + s.flipped + '">' +
+      (s.flipped ? back : front) +
+    '</div>' +
+    '<div class="card-actions">' +
+      '<button type="button" class="btn" data-action="grade" data-ok="0"' + (s.flipped ? '' : ' disabled') + '>Again</button>' +
+      '<button type="button" class="btn btn-solid" data-action="grade" data-ok="1"' + (s.flipped ? '' : ' disabled') + '>Got it</button>' +
+    '</div>' +
+    '<p class="shortcut">' + (s.flipped ? 'Grade yourself to continue' : 'Press <kbd>Space</kbd> to reveal') + '</p>';
   }
 
   function resultsView(s) {
     var total = s.results.length;
-    var correct = s.correctCount;
-    var pct = total ? percent(correct, total) : 0;
+    var pct = percent(s.correct, total);
     var missed = s.results.filter(function (r) { return !r.correct; });
-    var title = pct >= 90 ? 'すばらしい · Outstanding!' :
-      pct >= 70 ? 'よくできました · Nice work' :
-      pct >= 50 ? 'いいちょうし · Good progress' :
-      'がんばって · Keep going';
+    var rows = missed.slice(0, 12).map(function (r) {
+      return '<div class="row"><span class="en">' + r.card.answer + '</span>' +
+        '<span class="jp wide" lang="ja">' + r.card.detailHtml.split('<br>')[0] + '</span></div>';
+    }).join('');
 
-    var missedHtml = missed.length
-      ? '<div class="missed"><h3>Worth another look</h3><div class="missed-list">' +
-          missed.map(function (r) {
-            var speakText = r.item && r.item.deck === 'vocab' ? r.item.jp : r.item && r.item.deck === 'kanji' ? r.item.kanji : '';
-            return '<div class="missed-row">' + itemSummary(r.item) +
-              '<span class="spacer"></span>' + (speakText ? speakBtn(speakText) : '') + '</div>';
-          }).join('') +
-        '</div></div>'
-      : '<div class="missed" style="text-align:center"><p class="muted" style="font-size:13px">Perfect run — every card answered correctly.</p></div>';
-
-    return '<div class="card results">' +
-      '<div class="score-ring" style="--pct:' + pct + '"><span>' + pct + '%</span></div>' +
-      '<h2>' + title + '</h2>' +
-      '<p class="results-sub">' + (s.mode === 'quiz' ? 'Quiz complete' : 'Flashcard session complete') + ' · ' + esc(s.label) + '</p>' +
-      '<div class="result-stats">' +
-        '<div class="result-stat"><b>' + correct + '</b><span>Correct</span></div>' +
-        '<div class="result-stat"><b>' + (total - correct) + '</b><span>Missed</span></div>' +
-        '<div class="result-stat"><b>' + total + '</b><span>Cards</span></div>' +
+    return '<div class="result">' +
+      '<div class="score">' + pct + '%<small>' + s.correct + ' of ' + total + '</small></div>' +
+      '<p class="muted" style="margin-top:10px">' + (pct >= 80 ? 'Nice work.' : pct >= 50 ? 'Getting there.' : 'Worth another round.') + '</p>' +
+      '<div class="buttons">' +
+        (missed.length ? '<button class="btn btn-solid" data-action="review-missed">Review ' + missed.length + '</button>' : '') +
+        '<button class="btn" data-action="restart">Again</button>' +
+        '<button class="btn btn-quiet" data-action="end">Done</button>' +
       '</div>' +
-      '<div class="result-actions">' +
-        (missed.length ? '<button class="btn btn-primary" data-action="review-missed">Review ' + missed.length + ' missed</button>' : '') +
-        '<button class="btn btn-outline" data-action="restart-session">Study again</button>' +
-        '<button class="btn btn-outline" data-action="end-session">Done</button>' +
-      '</div>' +
-      missedHtml +
+      (missed.length ? '<h3>Missed</h3><div class="rows">' + rows + '</div>' : '') +
     '</div>';
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Routing & top-level render
-   * ------------------------------------------------------------------ */
+  /* ---------------------------------------------------------------- *
+   *  Routing, events, speech
+   * ---------------------------------------------------------------- */
 
   function currentRoute() {
     var r = location.hash.replace(/^#\/?/, '');
@@ -2297,92 +1727,53 @@
 
   function render() {
     var view = $('#view');
-
-    if (state.error) {
-      view.innerHTML = errorView(state.error);
-      updateNav('home');
-      return;
-    }
+    if (state.error) { view.innerHTML = failView(state.error); return; }
     if (!state.loaded) return;
 
     var route = currentRoute();
     state.route = route;
+    view.innerHTML = route === 'vocab' ? vocabView()
+      : route === 'kanji' ? kanjiView()
+      : route === 'grammar' ? grammarView()
+      : route === 'study' ? studyView()
+      : homeView();
 
-    var html = '';
-    if (route === 'home') html = homeView();
-    else if (route === 'vocab') html = vocabView();
-    else if (route === 'kanji') html = kanjiView();
-    else if (route === 'grammar') html = grammarView();
-    else html = studyView();
-
-    view.innerHTML = html;
-    updateNav(route);
-    updateHeader();
-    updateStorageNote();
-
-    var titles = {
-      home: 'Year 8 Japanese · Study companion',
-      vocab: 'Vocabulary · Year 8 Japanese',
-      kanji: 'Kanji · Year 8 Japanese',
-      grammar: 'Grammar · Year 8 Japanese',
-      study: 'Study · Year 8 Japanese'
-    };
-    document.title = titles[route] || titles.home;
-  }
-
-  function updateNav(route) {
     $all('[data-nav]').forEach(function (link) {
-      var active = link.dataset.nav === route;
-      link.classList.toggle('active', active);
-      if (active) link.setAttribute('aria-current', 'page');
+      if (link.dataset.nav === route) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
+    document.title = route === 'home' ? 'Year 8 Japanese' : route.charAt(0).toUpperCase() + route.slice(1) + ' · Year 8 Japanese';
+    updateStreak();
+
+    var note = $('#storage-note');
+    if (note && !storageOK) note.textContent = 'Progress cannot be saved in this browser';
   }
 
-  function errorView(err) {
-    var fileHint = location.protocol === 'file:'
-      ? '<p style="margin-top:12px">This page is open as a local file. Browsers block <code>fetch()</code> for <code>file://</code> pages. Serve the folder instead, for example:<br><code>python3 -m http.server</code> then open <code>http://localhost:8000</code>.</p>'
-      : '<p style="margin-top:12px">Make sure <code>vocab.json</code>, <code>kanji.json</code> and <code>structures.json</code> sit next to <code>index.html</code> on your host.</p>';
-    return '<div class="card error-card">' +
-      '<div class="eyebrow">Something went wrong</div>' +
-      '<h2>Could not load the study data</h2>' +
-      '<p>The page fetches the three JSON files that sit beside it. ' + esc(err && err.message ? err.message : 'The request failed.') + '</p>' +
-      fileHint +
-      '<button class="btn btn-primary" data-action="retry">Try again</button>' +
-    '</div>';
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Speech, toasts, misc actions
-   * ------------------------------------------------------------------ */
-
-  function cleanSpeech(text) {
-    return String(text || '')
-      .replace(/[（(][^）)]*[）)]/g, '')
-      .split(' / ')[0]
-      .replace(/[／/]/g, '')
-      .trim();
+  function failView(err) {
+    var hint = location.protocol === 'file:'
+      ? '<p>This page is open as a local file, and browsers block <code>fetch()</code> there. Run <code>python3 -m http.server</code> and open <code>http://localhost:8000</code>.</p>'
+      : '<p>Check that <code>vocab.json</code>, <code>kanji.json</code> and <code>structures.json</code> sit next to <code>index.html</code>.</p>';
+    return '<div class="fail"><h2>Could not load the study data</h2>' +
+      '<p>' + esc(err && err.message ? err.message : 'The request failed.') + '</p>' + hint +
+      '<button class="btn" data-action="retry" style="margin-top:12px">Try again</button></div>';
   }
 
   function speak(text) {
-    var clean = cleanSpeech(text);
-    if (!clean) return;
-    if (!('speechSynthesis' in window)) {
-      toast('Speech is not supported in this browser.');
-      return;
-    }
+    var clean = String(text || '')
+      .replace(/[（(][^）)]*[）)]/g, '')
+      .replace(/＿+/g, '')
+      .split(' / ')[0]
+      .trim();
+    if (!clean || !('speechSynthesis' in window)) return;
     try {
       window.speechSynthesis.cancel();
       var utter = new SpeechSynthesisUtterance(clean);
       utter.lang = 'ja-JP';
       utter.rate = 0.88;
-      var voices = window.speechSynthesis.getVoices() || [];
-      var jaVoice = voices.filter(function (v) { return /^ja/i.test(v.lang); })[0];
-      if (jaVoice) utter.voice = jaVoice;
+      var ja = (window.speechSynthesis.getVoices() || []).filter(function (v) { return /^ja/i.test(v.lang); })[0];
+      if (ja) utter.voice = ja;
       window.speechSynthesis.speak(utter);
-    } catch (e) {
-      toast('Could not play the pronunciation.');
-    }
+    } catch (e) { /* ignore */ }
   }
 
   function toast(message) {
@@ -2392,81 +1783,17 @@
     el.className = 'toast';
     el.textContent = message;
     host.appendChild(el);
-    setTimeout(function () {
-      el.style.opacity = '0';
-      el.style.transition = 'opacity .25s';
-      setTimeout(function () { el.remove(); }, 260);
-    }, 2400);
+    setTimeout(function () { el.remove(); }, 2400);
   }
 
   function resetProgress() {
-    if (!window.confirm('Reset all study progress? This clears mastery, review history and streaks, but keeps your theme.')) return;
+    if (!window.confirm('Reset all progress? Mastery, history and streaks will be cleared.')) return;
     state.progress = {};
     state.activity = {};
     saveStore();
-    updateHeader();
     render();
-    toast('Progress reset.');
+    toast('Progress reset');
   }
-
-  function clearBrowse(deck) {
-    if (deck === 'vocab') {
-      state.ui.vocabQuery = '';
-    } else if (deck === 'kanji') {
-      state.ui.kanjiQuery = '';
-      state.ui.kanjiFilter = 'all';
-    } else {
-      state.ui.structQuery = '';
-      state.ui.structCat = 'all';
-      state.ui.structType = 'all';
-    }
-    render();
-  }
-
-  function practiseFiltered() {
-    var list = getFilteredVocab();
-    if (!list.length) {
-      toast('No words match your search.');
-      return;
-    }
-    var capped = shuffle(list).slice(0, 30);
-    if (list.length > 30) toast('Studying 30 of ' + list.length + ' matching words.');
-    startSession({
-      mode: 'flash',
-      deck: 'vocab',
-      direction: state.setup.direction,
-      items: capped,
-      label: 'Vocabulary practice'
-    });
-  }
-
-  function refreshVocabResults() {
-    var host = $('#vocab-results');
-    if (!host) return;
-    host.innerHTML = vocabResultsHtml();
-    var count = $('#vocab-count');
-    if (count) count.innerHTML = vocabCountHtml();
-  }
-
-  function refreshKanjiResults() {
-    var host = $('#kanji-results');
-    if (!host) return;
-    host.innerHTML = kanjiResultsHtml();
-    var count = $('#kanji-count');
-    if (count) count.innerHTML = kanjiCountHtml();
-  }
-
-  function refreshStructResults() {
-    var host = $('#struct-results');
-    if (!host) return;
-    host.innerHTML = structureResultsHtml();
-    var count = $('#struct-count');
-    if (count) count.innerHTML = structCountHtml();
-  }
-
-  /* ------------------------------------------------------------------ *
-   *  Event listeners
-   * ------------------------------------------------------------------ */
 
   function bindEvents() {
     document.addEventListener('click', function (event) {
@@ -2474,201 +1801,104 @@
       if (!el) return;
       var action = el.dataset.action;
 
-      switch (action) {
-        case 'noop':
-          break;
-        case 'theme':
-          toggleTheme();
-          break;
-        case 'speak':
-          event.preventDefault();
-          event.stopPropagation();
-          speak(el.dataset.speak);
-          break;
-        case 'start':
-          startSession({
-            mode: el.dataset.mode || 'quiz',
-            deck: el.dataset.deck || state.setup.deck,
-            scope: el.dataset.scope || 'smart',
-            count: 10,
-            direction: state.setup.direction
-          });
-          break;
-        case 'quick-review':
-          if (previewCount('mixed', 'smart') === 0) {
-            toast('Nothing is due — try “All cards” in Study.');
-          } else {
-            startSession({ mode: 'quiz', deck: 'mixed', scope: 'smart', count: 10, direction: state.setup.direction });
-          }
-          break;
-        case 'setup': {
-          var key = el.dataset.key;
-          var value = el.dataset.value;
-          state.setup[key] = key === 'count' && value !== 'all' ? Number(value) : value;
-          render();
-          break;
-        }
-        case 'start-study': {
-          var setup = state.setup;
-          startSession({
-            mode: setup.mode,
-            deck: setup.deck,
-            scope: setup.scope,
-            count: setup.count,
-            direction: setup.direction
-          });
-          break;
-        }
-        case 'answer':
-          answerQuestion(Number(el.dataset.index));
-          break;
-        case 'next':
-          nextQuestion();
-          break;
-        case 'flip':
-          toggleFlash();
-          break;
-        case 'grade':
-          gradeFlash(Number(el.dataset.grade));
-          break;
-        case 'end-session':
-          endSession();
-          break;
-        case 'restart-session':
-          restartSession();
-          break;
-        case 'review-missed':
-          reviewMissed();
-          break;
-        case 'open-kanji':
-          openKanji(el.dataset.id);
-          break;
-        case 'close-modal':
-          closeModal();
-          break;
-        case 'practise-item': {
-          var item = state.byId.get(el.dataset.id);
-          if (item) {
-            closeModal();
-            startSession({ mode: 'flash', deck: item.deck, direction: state.setup.direction, items: [item], label: 'Kanji practice' });
-          }
-          break;
-        }
-        case 'kanji-filter':
-          state.ui.kanjiFilter = el.dataset.value;
-          render();
-          break;
-        case 'practise-filtered':
-          practiseFiltered();
-          break;
-        case 'clear-browse':
-          clearBrowse(el.dataset.deck);
-          break;
-        case 'reset':
-          resetProgress();
-          break;
-        case 'retry':
-          state.error = null;
-          state.loaded = false;
-          $('#view').innerHTML = '<div class="loading"><div class="spinner" aria-hidden="true"></div><h2>Loading your study desk…</h2><p>Fetching vocabulary, kanji and grammar patterns.</p></div>';
-          loadData();
-          break;
+      if (action === 'speak') { event.preventDefault(); event.stopPropagation(); speak(el.dataset.speak); return; }
+      if (action === 'theme') { toggleTheme(); return; }
+      if (action === 'reset') { resetProgress(); return; }
+      if (action === 'retry') { state.error = null; state.loaded = false; $('#view').innerHTML = '<p class="load">Loading…</p>'; loadData(); return; }
+
+      if (action === 'setup') {
+        var key = el.dataset.key;
+        var value = el.dataset.value;
+        state.setup[key] = key === 'count' && value !== 'all' ? Number(value) : value;
+        render();
+        return;
       }
+      if (action === 'start-study') {
+        startSession({ deck: state.setup.deck, mode: state.setup.mode, scope: state.setup.scope, count: state.setup.count });
+        return;
+      }
+      if (action === 'sentence-practice') {
+        state.setup.deck = 'sentences';
+        state.setup.mode = 'quiz';
+        startSession({ deck: 'sentences', mode: 'quiz', count: 8 });
+        return;
+      }
+      if (action === 'quick-review') {
+        if (previewCount('mixed', 'smart') === 0) { toast('Nothing due — try All in Study.'); return; }
+        startSession({ deck: 'mixed', mode: 'quiz', scope: 'smart', count: 12 });
+        return;
+      }
+      if (action === 'answer') { answerQuiz(Number(el.dataset.index)); return; }
+      if (action === 'next') { nextCard(); return; }
+      if (action === 'flip') { flip(); return; }
+      if (action === 'grade') { gradeFlash(el.dataset.ok === '1'); return; }
+      if (action === 'end') { endSession(); return; }
+      if (action === 'restart') { restartSession(); return; }
+      if (action === 'review-missed') { reviewMissed(); return; }
     });
 
     document.addEventListener('input', function (event) {
-      var target = event.target;
-      if (target.id === 'vocab-search') {
-        state.ui.vocabQuery = target.value;
-        refreshVocabResults();
-      } else if (target.id === 'kanji-search') {
-        state.ui.kanjiQuery = target.value;
-        refreshKanjiResults();
-      } else if (target.id === 'struct-search') {
-        state.ui.structQuery = target.value;
-        refreshStructResults();
-      }
-    });
-
-    document.addEventListener('change', function (event) {
-      var target = event.target;
-      if (target.id === 'vocab-sort') {
-        state.ui.vocabSort = target.value;
-        refreshVocabResults();
-      } else if (target.id === 'struct-cat') {
-        state.ui.structCat = target.value;
-        refreshStructResults();
-      } else if (target.id === 'struct-type') {
-        state.ui.structType = target.value;
-        refreshStructResults();
+      var id = event.target.id;
+      if (id === 'vocab-search') {
+        state.ui.vocabQuery = event.target.value;
+        var list = state.items.vocab.filter(function (item) {
+          var q = state.ui.vocabQuery.trim().toLowerCase();
+          return !q || item.en.toLowerCase().indexOf(q) !== -1 || item.jp.indexOf(q) !== -1;
+        });
+        $('.rows').innerHTML = list.length ? list.map(function (item) {
+          return '<div class="row">' + statusDot(item.id) +
+            '<span class="en">' + esc(item.en) + '</span>' +
+            '<span class="jp" lang="ja">' + esc(item.jp) + '</span>' +
+            speakBtn(item.jp) + '</div>';
+        }).join('') : '<p class="empty">No words match.</p>';
+        $('.count').textContent = list.length + ' of ' + state.items.vocab.length;
+      } else if (id === 'kanji-search') {
+        state.ui.kanjiQuery = event.target.value;
+        render();
+        var box = $('#kanji-search');
+        if (box) { box.focus(); box.setSelectionRange(box.value.length, box.value.length); }
+      } else if (id === 'struct-search') {
+        state.ui.structQuery = event.target.value;
+        render();
+        var box2 = $('#struct-search');
+        if (box2) { box2.focus(); box2.setSelectionRange(box2.value.length, box2.value.length); }
       }
     });
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        if (state.modal) {
-          closeModal();
-          return;
-        }
-      }
-      if (state.modal) return;
-      if (currentRoute() !== 'study' || !state.session || state.session.finished) return;
-
+      var route = currentRoute();
+      if (route !== 'study' || !state.session || state.session.finished) return;
       var target = event.target;
-      var closest = target && typeof target.closest === 'function'
-        ? function (selector) { return target.closest(selector); }
-        : function () { return null; };
+      var closest = target && typeof target.closest === 'function' ? function (s) { return target.closest(s); } : function () { return null; };
       if (closest('input, textarea, select')) return;
-
-      var s = state.session;
       var onControl = !!closest('button, a');
+      var s = state.session;
 
       if (s.mode === 'quiz') {
-        if (s.answered === null) {
-          if (/^[1-4]$/.test(event.key)) {
-            event.preventDefault();
-            answerQuestion(Number(event.key) - 1);
-          }
-        } else if (event.key === 'Enter' && !onControl) {
+        if (s.answered === null && /^[1-4]$/.test(event.key)) {
           event.preventDefault();
-          nextQuestion();
+          answerQuiz(Number(event.key) - 1);
+        } else if (s.answered !== null && event.key === 'Enter' && !onControl) {
+          event.preventDefault();
+          nextCard();
         }
-      } else {
-        if (event.key === ' ' || event.key === 'Spacebar') {
-          if (!onControl) {
-            event.preventDefault();
-            toggleFlash();
-          }
-        } else if (event.key === 'Enter' && !onControl) {
-          event.preventDefault();
-          if (s.flipped) gradeFlash(1); else toggleFlash();
-        } else if (event.key === 'ArrowRight' && s.flipped) {
-          event.preventDefault();
-          gradeFlash(1);
-        } else if (event.key === 'ArrowLeft' && s.flipped) {
-          event.preventDefault();
-          gradeFlash(0);
-        }
+        return;
       }
+      if (event.key === ' ' && !onControl) { event.preventDefault(); flip(); }
+      else if (event.key === 'Enter' && !onControl) { event.preventDefault(); if (s.flipped) gradeFlash(true); else flip(); }
+      else if (event.key === 'ArrowRight' && s.flipped) { event.preventDefault(); gradeFlash(true); }
+      else if (event.key === 'ArrowLeft' && s.flipped) { event.preventDefault(); gradeFlash(false); }
     });
 
     window.addEventListener('hashchange', function () {
-      if (state.modal) closeModal();
-      var route = currentRoute();
-      if (route !== state.route) window.scrollTo({ top: 0, behavior: 'auto' });
+      if (currentRoute() !== state.route) window.scrollTo({ top: 0 });
       render();
     });
   }
 
-  /* ------------------------------------------------------------------ *
-   *  Boot
-   * ------------------------------------------------------------------ */
-
   loadStore();
   applyTheme();
   bindEvents();
-  updateStorageNote();
-  updateHeader();
   loadData();
 })();
 
